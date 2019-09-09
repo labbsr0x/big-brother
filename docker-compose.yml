@@ -1,0 +1,69 @@
+version: '3.5'
+
+services:
+
+  # big brother is defined by a conjuntion of services: a bot, etcd, monitor, and alert manager
+
+  bot:
+    build:
+      dockerfile: bot/Dockerfile
+      context: .
+    image: labbsr0x/bb-bot
+
+  etcd:
+    image: quay.io/coreos/etcd:v3.2.25
+    environment:
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+  
+  alert-manager:
+    build:
+      dockerfile: bot/Dockerfile
+      context: .
+    image: labbsr0x/big-brother-alert-manager
+    ports:
+      - 9093:9093
+    environment:
+      - WEBHOOK_URL=http://bot:8080
+
+  monitor:
+    build:
+      dockerfile: monitor/Dockerfile
+      context: .
+    image: labbsr0x/big-brother-monitor:latest
+    ports:
+      - 9090:9090
+    environment:
+      - BB_PROMSTER_LEVEL=1
+      - ETCD_URLS=http://etcd:2379
+      - SCRAPE_ETCD_PATH=/services/clients
+      - SCRAPE_PATHS=/federate
+
+  # below is defined the example setup for metric consumption by big brother
+
+  example-service:
+    image: abilioesteves/prom-expressjs
+    ports:
+      - 23498:23498
+    environment:
+      - REGISTRY_ETCD_URL=http://etcd:2379
+  
+  example-etcd:
+    image: quay.io/coreos/etcd:v3.2.25
+    environment:
+      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+  
+  exammple-bb-promster:
+    image: labbsr0x/bb-promster:latest
+    ports:
+      - 9090:9090
+    environment:
+      - BB_PROMSTER_LEVEL=1
+      - ETCD_URLS=http://etcd:2379
+      - SCRAPE_ETCD_PATH=/services/example
+
+  
+
+
+
