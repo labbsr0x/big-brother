@@ -1,0 +1,9 @@
+groups:
+- name: dependency_alerts
+  rules:
+  - alert: dependency_unresponsive
+    expr: dependency_up < 1
+    for: 5m
+    annotations:
+      description: A dependência {{$labels.name}} não está respondendo.
+      summary: Alerta para caso uma dependência passe mais de 5 minutos sem resposta
