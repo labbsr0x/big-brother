@@ -1,0 +1,11 @@
+global:
+
+route:
+  receiver: 'bot'
+
+receivers:
+- name: 'bot'
+  webhook_configs:
+  - send_resolved: true
+    url: '$WEBHOOK_URL'
+

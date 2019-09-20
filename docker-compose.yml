@@ -1,14 +1,19 @@
 version: '3.5'
 
-services:
-
-  # big brother is defined by a conjuntion of services: a bot, etcd, monitor, and alert manager
+services: # big brother is defined by a conjuntion of services: a bot, etcd, monitor, and alert manager
 
   bot:
-    build:
-      dockerfile: bot/Dockerfile
-      context: .
-    image: labbsr0x/bb-bot
+    image: metalmatze/alertmanager-bot:0.4.0 # this will be replaced by our own custom bot
+    environment:
+      - ALERTMANAGER_URL=http://alertmanager:9093
+      - BOLT_PATH=/data/bot.db
+      - STORE=bolt
+      - LISTEN_ADDR=0.0.0.0:8080
+      - TELEGRAM_ADMIN=${TELEGRAM_ADMIN}
+      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+      - TEMPLATE_PATHS=/templates/default.tmpl
+    volumes:
+      - bot:/data
 
   etcd:
     image: quay.io/coreos/etcd:v3.2.25
@@ -16,20 +21,22 @@ services:
       - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
       - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
   
-  alert-manager:
+  alertmanager:
     build:
-      dockerfile: bot/Dockerfile
-      context: .
-    image: labbsr0x/big-brother-alert-manager
+      dockerfile: Dockerfile
+      context: alertmanager
+    image: labbsr0x/big-brother-alertmanager
     ports:
       - 9093:9093
     environment:
       - WEBHOOK_URL=http://bot:8080
+    volumes:
+      - alertmanager:/alertmanager
 
   monitor:
     build:
-      dockerfile: monitor/Dockerfile
-      context: .
+      dockerfile: Dockerfile
+      context: monitor
     image: labbsr0x/big-brother-monitor:latest
     ports:
       - 9090:9090
@@ -62,6 +69,10 @@ services:
       - BB_PROMSTER_LEVEL=1
       - ETCD_URLS=http://etcd:2379
       - SCRAPE_ETCD_PATH=/services/example
+
+volumes:
+  bot:
+  alertmanager:
 
   
 

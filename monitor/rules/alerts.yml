@@ -5,5 +5,5 @@ groups:
     expr: dependency_up < 1
     for: 5m
     annotations:
-      description: A dependência {{$labels.name}} não está respondendo.
+      description: A dependência {{$labels.name}} do serviço {{$labels.prsn}} não está respondendo.
       summary: Alerta para caso uma dependência passe mais de 5 minutos sem resposta
