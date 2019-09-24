@@ -3,7 +3,7 @@ groups:
   rules:
   - alert: dependency_unresponsive
     expr: dependency_up < 1
-    for: 5m
+    for: 2m
     annotations:
       description: A dependência {{$labels.name}} do serviço {{$labels.prsn}} não está respondendo.
-      summary: Alerta para caso uma dependência passe mais de 5 minutos sem resposta
+      summary: Alerta para caso uma dependência passe mais de 2 minutos sem resposta
