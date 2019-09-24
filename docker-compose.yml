@@ -1,6 +1,8 @@
 version: '3.5'
 
-services: # big brother is defined by a conjuntion of services: a bot, etcd, monitor, and alert manager
+services:
+
+  # big brother is defined below by a collection of services: a bot, etcd, monitor, alertmanager and grafana
 
   bot:
     image: metalmatze/alertmanager-bot:0.4.0 # this will be replaced by our own custom bot
@@ -12,20 +14,39 @@ services: # big brother is defined by a conjuntion of services: a bot, etcd, mon
       - TELEGRAM_ADMIN=${TELEGRAM_ADMIN}
       - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
       - TEMPLATE_PATHS=/templates/default.tmpl
+    depends_on:
+      - alertmanager
     volumes:
       - bot:/data
 
+  grafana:
+    image: labbsr0x/big-brother-grafana
+    build:
+      context: grafana
+      dockerfile: Dockerfile
+      args:
+        prometheusurl: http://localhost:9090
+        acesstype: direct
+        useradmin: bigbrother
+        userpassword: bigbrother
+    depends_on:
+      - monitor
+    ports:
+      - 3000:3000
+
   etcd:
     image: quay.io/coreos/etcd:v3.2.25
+    ports:
+      - 2379
     environment:
       - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
       - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
   
   alertmanager:
+    image: labbsr0x/big-brother-alertmanager
     build:
       dockerfile: Dockerfile
       context: alertmanager
-    image: labbsr0x/big-brother-alertmanager
     ports:
       - 9093:9093
     environment:
@@ -34,40 +55,47 @@ services: # big brother is defined by a conjuntion of services: a bot, etcd, mon
       - alertmanager:/alertmanager
 
   monitor:
+    image: labbsr0x/big-brother-monitor:latest
     build:
       dockerfile: Dockerfile
       context: monitor
-    image: labbsr0x/big-brother-monitor:latest
+    depends_on:
+      - example-bb-promster
+      - alertmanager
+      - etcd
     ports:
       - 9090:9090
     environment:
       - BB_PROMSTER_LEVEL=1
       - ETCD_URLS=http://etcd:2379
-      - SCRAPE_ETCD_PATH=/services/clients
-      - SCRAPE_PATHS=/federate
 
   # below is defined the example setup for metric consumption by big brother
 
   example-service:
-    image: abilioesteves/prom-expressjs
+    image: labbsr0x/prom-expressjs
     ports:
       - 23498:23498
     environment:
-      - REGISTRY_ETCD_URL=http://etcd:2379
+      - REGISTRY_ETCD_URL=http://example-etcd:2379
   
   example-etcd:
     image: quay.io/coreos/etcd:v3.2.25
+    ports:
+      - 2379
     environment:
       - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
-      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
+      - ETCD_ADVERTISE_CLIENT_URLS=http://example-etcd:2379
   
-  exammple-bb-promster:
+  example-bb-promster:
     image: labbsr0x/bb-promster:latest
+    depends_on:
+      - example-etcd
+      - example-service
     ports:
-      - 9090:9090
+      - 9091:9090
     environment:
       - BB_PROMSTER_LEVEL=1
-      - ETCD_URLS=http://etcd:2379
+      - ETCD_URLS=http://example-etcd:2379
       - SCRAPE_ETCD_PATH=/services/example
 
 volumes:

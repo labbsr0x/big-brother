@@ -1,0 +1,15 @@
+version: '3.5'
+
+services:
+  grafana:
+    image: registry.labbs.com.br/valordebensrurais/monitor/grafana
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        prometheusurl: https://promster-l1-valordebensrurais.labbs.com.br
+        acesstype: direct
+        useradmin: admin
+        userpassword: monitor-valordebensrurais
+    ports:
+      - 3000:3000
