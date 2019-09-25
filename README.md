@@ -5,7 +5,7 @@ This project defines a bot to effectively communicate observability events to ap
 
 It collects the necessary metrics from a client provided `bb-promster` cluster endpoint.
 
-Then, the **Big Brother** federates it's own `bb-promster` cluster to the provided endpoint, and starts collecting **Big Brother** specific metrics.
+Then, the **Big Brother** federates it's own monitoring cluster to the provided endpoint, and starts collecting **Big Brother** specific metrics.
 
 These metrics are defined by our collection of monitoring libraries. 
 
@@ -38,7 +38,7 @@ Soon we'll also have the following libraries:
 3. `spring-monitor` for the Pivotal's Spring web framework;
 4. `ejb-monitor` for Enterprise Java Bean web frameworks;
 
-Without these libraries, you would have to export the metrics by yourself, possibly leading to inconsistencies and other errors when setting up your app's observability with **Big Brother**.  
+Without these libraries, you would have to export the metrics by yourself, possibly leading to inconsistencies and other errors when setting up your app's observability with **Big Brother**.   
 
 # How to Run
 
@@ -50,9 +50,9 @@ TELEGRAM_ADMIN=<yourid> TELEGRAM_TOKEN=<XXXXX:YYYYYY> docker-compose up -d --bui
 docker-compose exec --env ETCDCTL_API=3 etcd etcdctl put "/clients/example/example-bb-promster:9090" -- ""
 ```
 
-This will run an example app with its `bb-promster` cluster and the `big-brother` app federating it.
+This will run an example app with its own `bb-promster` cluster and the **Big Brother** app federating it.
 
-The `big-brother` app is composed by a telegram bot, a prometheus alertmanager, a promster cluster with its etcd key-value store.
+The **Big Brother** app is composed by an **ETCD cluster**, a **Dialogflow Bot**, a **Prometheus Alertmanager**, a **Grafana** and a **Promster** cluster, all with it's own defined configuration needs.
 
 # Trivia
 
@@ -60,4 +60,4 @@ The name is inspired by George Orwell's 1984 **Big Brother** character.
 
 In this book, **Big Brother** is an entity that is *omniconscious*, being able to watch everyone, everywhere. 
 
-This is exactly what we aim to achieve with this project: a way for you to easily and effective watch every project you have without any prior knowledge of the observability principles and practices with Prometheus. 
+This is exactly what we aim to achieve with this project: a way for you to easily and effective watch every project you have without any prior knowledge of observability concepts and Prometheus best practices. 

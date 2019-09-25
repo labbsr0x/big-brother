@@ -68,6 +68,7 @@ services:
     environment:
       - BB_PROMSTER_LEVEL=1
       - ETCD_URLS=http://etcd:2379
+      - ALERT_MANAGER_URLS=alertmanager:9093
 
   # below is defined the example setup for metric consumption by big brother
 

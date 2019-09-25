@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 #!/bin/sh
 set -e
-set -x
 
 if [[ "$ETCD_URLS" != "" ]]; then
     export REGISTRY_ETCD_URL=$ETCD_URLS
@@ -48,5 +47,7 @@ fi
 if [[ "$SCRAPE_TIMEOUT" = "" ]]; then
     export SCRAPE_TIMEOUT="$((BB_PROMSTER_LEVEL * 15))s"
 fi
+
+sed -i -e 's/$ALERT_MANAGER_URLS/'"${ALERT_MANAGER_URLS}"'/g' "/prometheus.yml.tmpl"
 
 sh /startup.sh # inherited from flaviostutz/promster

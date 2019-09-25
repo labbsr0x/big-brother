@@ -10,7 +10,7 @@ rule_files:
 scrape_configs:
   - job_name: 'prometheus'
     static_configs:
-    - targets: ['localhost:9090']
+       - targets: ['localhost:9090']
 
   - job_name: 'clients'
     metrics_path: /federate
@@ -21,4 +21,10 @@ scrape_configs:
     file_sd_configs:
       - files: 
         - /servers.json
+
+alerting:
+  alertmanagers:
+    - static_configs:
+       - targets: ['$ALERT_MANAGER_URLS']
+
 
