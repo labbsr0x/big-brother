@@ -1,9 +1,18 @@
-FROM labbsr0x/bb-promster:0.2.0
+FROM flaviostutz/promster:1.0.1
 
+ENV ETCD_URL ""
+ENV BB_PROMSTER_LEVEL ""
+ENV SCRAPE_INTERVAL ""
+ENV SCRAPE_TIMEOUT ""
+
+ENV REGISTRY_ETCD_BASE /monitor
+ENV REGISTRY_TTL 15
+ENV RETENTION_TIME 30d
+
+ADD run.sh /
 ADD rules /etc/prometheus/
+ADD prometheus.yml.tmpl /
 
-ADD start-monitor.sh /
+RUN chmod 777 /run.sh
 
-RUN chmod 777 /start-monitor.sh
-
-CMD ["-C", "/start-monitor.sh"]
+CMD ["-C", "/run.sh"]

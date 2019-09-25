@@ -45,8 +45,9 @@ Without these libraries, you would have to export the metrics by yourself, possi
 Type the following command in your terminal:
 
 ```bash
-> TELEGRAM_ADMIN=<yourid> TELEGRAM_TOKEN=<XXXXX:YYYYYY> docker-compose up -d --build
-> docker-compose exec --env ETCDCTL_API=3 etcd etcdctl put "/clients/example/example-bb-promster:9090" -- ""
+TELEGRAM_ADMIN=<yourid> TELEGRAM_TOKEN=<XXXXX:YYYYYY> docker-compose up -d --build
+
+docker-compose exec --env ETCDCTL_API=3 etcd etcdctl put "/clients/example/example-bb-promster:9090" -- ""
 ```
 
 This will run an example app with its `bb-promster` cluster and the `big-brother` app federating it.
