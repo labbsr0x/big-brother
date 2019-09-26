@@ -55,7 +55,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(sum_over_time(requests_seconds_sum:irate[1d])/sum_over_time(requests_seconds_count:irate[1d])) by (url) ",
+          "expr": "avg(sum_over_time(request_seconds_sum:irate[1d])/sum_over_time(request_seconds_count:irate[1d])) by (url, prsn) ",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{url}}",
