@@ -37,7 +37,7 @@ export REGISTRY_SERVICE="l${BB_PROMSTER_LEVEL}"
 if [[ $ll -eq 0 ]]; then
     export SCRAPE_ETCD_PATH="/clients" # all clients should be registered inside the /clients etcd path
 else
-    export SCRAPE_ETCD_PATH="${REGISTRY_ETCD_BASE}/l$ll" # in case we need to scale, big brother monitors will federate themselves
+    export SCRAPE_ETCD_PATH="${REGISTRY_ETCD_BASE}/l$ll" # in case we need to scale, the big brother monitors will federate among themselves
 fi
 
 if [[ "$SCRAPE_INTERVAL" = "" ]]; then
