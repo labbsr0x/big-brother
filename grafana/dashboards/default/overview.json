@@ -66,7 +66,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Avg response time per url",
+      "title": "Avg response time per url per service",
       "tooltip": {
         "shared": true,
         "sort": 0,
