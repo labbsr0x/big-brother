@@ -1,10 +1,13 @@
-FROM abilioesteves/gowebbuilder:v1.0.0 as BUILDER
+FROM abilioesteves/gowebbuilder:1.2.0 as BUILDER
 
-ENV p $GOPATH/src/github.com/labbsr0x/big-brother/bot
+WORKDIR /src/
 
-ADD ./ ${p}
-WORKDIR ${p}
-RUN go get -v ./...
+ADD go.mod .
+ADD go.sum .
+
+RUN go mod download
+
+ADD . .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /bot main.go
 
