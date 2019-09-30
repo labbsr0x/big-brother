@@ -5,15 +5,12 @@ services:
   # big brother is defined below by a collection of services: a bot, etcd, monitor, alertmanager and grafana
 
   bot:
-    image: metalmatze/alertmanager-bot:0.4.0 # this will be replaced by our own custom bot
+    image: labbsr0x/big-brother-bot:latest
+    build:
+      context: bot
+      dockerfile: Dockerfile
     environment:
-      - ALERTMANAGER_URL=http://alertmanager:9093
-      - BOLT_PATH=/data/bot.db
-      - STORE=bolt
-      - LISTEN_ADDR=0.0.0.0:8080
-      - TELEGRAM_ADMIN=${TELEGRAM_ADMIN}
-      - TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
-      - TEMPLATE_PATHS=/templates/default.tmpl
+      - LOG_LEVEL=debug
     depends_on:
       - alertmanager
     volumes:
