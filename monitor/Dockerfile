@@ -1,4 +1,4 @@
-FROM flaviostutz/promster:1.0.1
+FROM flaviostutz/promster:latest
 
 ENV ETCD_URL ""
 ENV BB_PROMSTER_LEVEL ""
