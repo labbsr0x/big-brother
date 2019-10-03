@@ -15,6 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "iteration": 1570136398967,
   "links": [],
   "panels": [
     {
@@ -138,7 +139,7 @@
           ],
           "values": false
         },
-        "orientation": "vertical"
+        "orientation": "horizontal"
       },
       "targets": [
         {

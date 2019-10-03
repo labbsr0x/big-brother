@@ -94,7 +94,7 @@ services:
     environment:
       - BB_PROMSTER_LEVEL=1
       - ETCD_URLS=http://example-etcd:2379
-      - SCRAPE_ETCD_PATH=/services/example
+      - SCRAPE_ETCD_PATH=/services/metrics-generator
 
 volumes:
   bot:
