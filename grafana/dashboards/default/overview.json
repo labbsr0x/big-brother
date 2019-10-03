@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "panels": [
     {
@@ -55,10 +54,10 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(sum_over_time(request_seconds_sum:irate[1d])/sum_over_time(request_seconds_count:irate[1d])) by (url, prsn) ",
+          "expr": "avg(sum_over_time(request_seconds_sum:irate{prsn=\"$Service\"}[1d])/sum_over_time(request_seconds_count:irate{prsn=\"$Service\"}[1d])) by (addr)",
           "format": "time_series",
           "intervalFactor": 1,
-          "legendFormat": "{{url}}",
+          "legendFormat": "{{addr}}",
           "refId": "A"
         }
       ],
@@ -66,7 +65,7 @@
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Avg response time per url per service",
+      "title": "Avg response time per address",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -102,13 +101,109 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 8,
+      "links": [],
+      "options": {
+        "displayMode": "basic",
+        "fieldOptions": {
+          "calcs": [
+            "last"
+          ],
+          "defaults": {
+            "max": 1,
+            "min": 0,
+            "title": ""
+          },
+          "mappings": [],
+          "override": {},
+          "thresholds": [
+            {
+              "color": "red",
+              "index": 0,
+              "value": null
+            },
+            {
+              "color": "green",
+              "index": 1,
+              "value": 1
+            }
+          ],
+          "values": false
+        },
+        "orientation": "vertical"
+      },
+      "targets": [
+        {
+          "aggregation": "Last",
+          "decimals": 2,
+          "displayAliasType": "Warning / Critical",
+          "displayType": "Regular",
+          "displayValueWithAlias": "Never",
+          "expr": "dependency_up{prsn=\"$Service\"}",
+          "format": "time_series",
+          "group": {
+            "alias": "",
+            "name": "Status Checks",
+            "url": ""
+          },
+          "intervalFactor": 1,
+          "legendFormat": "{{name}}",
+          "refId": "A",
+          "units": "none",
+          "valueHandler": "Number Threshold"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Dependencies Status",
+      "type": "bargauge"
     }
   ],
   "schemaVersion": 18,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "text": "Example",
+          "value": "Example"
+        },
+        "datasource": "prometheus",
+        "definition": "request_seconds_count:irate",
+        "hide": 0,
+        "includeAll": false,
+        "label": null,
+        "multi": false,
+        "name": "Service",
+        "options": [
+          {
+            "selected": true,
+            "text": "Example",
+            "value": "Example"
+          }
+        ],
+        "query": "request_seconds_count:irate",
+        "refresh": 0,
+        "regex": "/.*prsn=\"([^\"]*).*/",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -142,5 +237,5 @@
   "timezone": "",
   "title": "Health Overview",
   "uid": "1pCmwjOWk",
-  "version": 2
+  "version": 1
 }
