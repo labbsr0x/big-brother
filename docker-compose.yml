@@ -70,9 +70,9 @@ services:
   # below is defined the example setup for metric consumption by big brother
 
   example-service:
-    image: labbsr0x/prom-expressjs:latest
+    image: abilioesteves/metrics-generator:latest
     ports:
-      - 23498:23498
+      - 32865:32865
     environment:
       - REGISTRY_ETCD_URL=http://example-etcd:2379
   
