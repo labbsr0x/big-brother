@@ -15,17 +15,229 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 2,
-  "iteration": 1570482752333,
+  "iteration": 1570483823834,
   "links": [],
   "panels": [
+    {
+      "columns": [
+        {
+          "text": "Avg",
+          "value": "avg"
+        }
+      ],
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 0,
+        "y": 0
+      },
+      "id": 8,
+      "links": [],
+      "options": {},
+      "pageSize": 10,
+      "scroll": false,
+      "showHeader": true,
+      "sort": {
+        "col": 1,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Address",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "Metric",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Error",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Avg",
+          "thresholds": [],
+          "type": "number",
+          "unit": "percentunit"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "topk(10,\n  sum(request_seconds_count:irate{prsn=\"$prsn\",status!~\"2..\"}) by (addr)\n  /\n  sum(request_seconds_count:irate{prsn=\"$prsn\"}) by (addr)\n)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{addr}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Top 10 Error rate",
+      "transform": "timeseries_aggregations",
+      "type": "table"
+    },
+    {
+      "columns": [
+        {
+          "text": "Avg",
+          "value": "avg"
+        }
+      ],
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 8,
+        "y": 0
+      },
+      "id": 9,
+      "links": [],
+      "options": {},
+      "pageSize": 10,
+      "scroll": false,
+      "showHeader": true,
+      "sort": {
+        "col": 1,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Address",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "Metric",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Latency",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Avg",
+          "thresholds": [],
+          "type": "number",
+          "unit": "s"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "topk(10,\n  sum(request_seconds_sum:irate{prsn=\"$prsn\"}) by (addr)\n  /\n  sum(request_seconds_count:irate{prsn=\"$prsn\"}) by (addr)\n)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{addr}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Top 10 Latency",
+      "transform": "timeseries_aggregations",
+      "type": "table"
+    },
+    {
+      "columns": [
+        {
+          "text": "Avg",
+          "value": "avg"
+        }
+      ],
+      "fontSize": "100%",
+      "gridPos": {
+        "h": 10,
+        "w": 8,
+        "x": 16,
+        "y": 0
+      },
+      "id": 10,
+      "links": [],
+      "options": {},
+      "pageSize": 10,
+      "scroll": false,
+      "showHeader": true,
+      "sort": {
+        "col": 1,
+        "desc": true
+      },
+      "styles": [
+        {
+          "alias": "Address",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "decimals": 2,
+          "pattern": "Metric",
+          "thresholds": [],
+          "type": "number",
+          "unit": "short"
+        },
+        {
+          "alias": "Requests",
+          "colorMode": null,
+          "colors": [
+            "rgba(245, 54, 54, 0.9)",
+            "rgba(237, 129, 40, 0.89)",
+            "rgba(50, 172, 45, 0.97)"
+          ],
+          "dateFormat": "YYYY-MM-DD HH:mm:ss",
+          "decimals": 2,
+          "mappingType": 1,
+          "pattern": "Avg",
+          "thresholds": [],
+          "type": "number",
+          "unit": "reqps"
+        }
+      ],
+      "targets": [
+        {
+          "expr": "topk(10,\n  sum(request_seconds_count:irate{prsn=\"$prsn\",status!~\"2..\"}) by (addr)\n)",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "legendFormat": "{{addr}}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Top 10 Throughput",
+      "transform": "timeseries_aggregations",
+      "type": "table"
+    },
     {
       "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 0
+        "y": 10
       },
       "id": 6,
       "panels": [],
@@ -51,7 +263,7 @@
         "h": 9,
         "w": 8,
         "x": 0,
-        "y": 1
+        "y": 11
       },
       "id": 2,
       "legend": {
@@ -175,7 +387,7 @@
         "h": 9,
         "w": 8,
         "x": 8,
-        "y": 1
+        "y": 11
       },
       "id": 3,
       "legend": {
@@ -300,7 +512,7 @@
         "h": 9,
         "w": 8,
         "x": 16,
-        "y": 1
+        "y": 11
       },
       "id": 4,
       "legend": {
@@ -413,818 +625,6 @@
         "align": true,
         "alignLevel": null
       }
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 10
-      },
-      "id": 7,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": 1570482752333,
-      "repeatPanelId": 6,
-      "scopedVars": {
-        "addr": {
-          "selected": true,
-          "text": "/resource/test-0003",
-          "value": "/resource/test-0003"
-        }
-      },
-      "title": "$addr",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "description": "Throughput and Latency of $addr",
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 8,
-        "x": 0,
-        "y": 11
-      },
-      "id": 8,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1570482752333,
-      "repeatPanelId": 2,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "addr": {
-          "selected": true,
-          "text": "/resource/test-0003",
-          "value": "/resource/test-0003"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Throughput",
-          "color": "#73BF69",
-          "yaxis": 1
-        },
-        {
-          "alias": "Latency",
-          "color": "#5794F2",
-          "yaxis": 2
-        },
-        {
-          "alias": "Error rate",
-          "color": "#F2495C",
-          "yaxis": 2
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Throughput",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(request_seconds_sum:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Latency",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\", status!~\"2..\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "hide": true,
-          "intervalFactor": 1,
-          "legendFormat": "Error rate",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Throughput and Latency",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "reqps",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "s",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "description": "Throughput and Error rate of $addr",
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 8,
-        "x": 8,
-        "y": 11
-      },
-      "id": 9,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1570482752333,
-      "repeatPanelId": 3,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "addr": {
-          "selected": true,
-          "text": "/resource/test-0003",
-          "value": "/resource/test-0003"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Throughput",
-          "color": "#73BF69",
-          "yaxis": 1
-        },
-        {
-          "alias": "Latency",
-          "color": "#5794F2",
-          "yaxis": 2
-        },
-        {
-          "alias": "Error rate",
-          "color": "#F2495C",
-          "yaxis": 2
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Throughput",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(request_seconds_sum:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "hide": true,
-          "intervalFactor": 1,
-          "legendFormat": "Latency",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\", status!~\"2..\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 1,
-          "legendFormat": "Error rate",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Throughput and Error rate",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "reqps",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "description": "Latency and Error rate of $addr",
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 8,
-        "x": 16,
-        "y": 11
-      },
-      "id": 10,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1570482752333,
-      "repeatPanelId": 4,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "addr": {
-          "selected": true,
-          "text": "/resource/test-0003",
-          "value": "/resource/test-0003"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Throughput",
-          "color": "#73BF69",
-          "yaxis": 1
-        },
-        {
-          "alias": "Latency",
-          "color": "#5794F2",
-          "yaxis": 1
-        },
-        {
-          "alias": "Error rate",
-          "color": "#F2495C",
-          "yaxis": 2
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "hide": true,
-          "intervalFactor": 1,
-          "legendFormat": "Throughput",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(request_seconds_sum:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Latency",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\", status!~\"2..\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 1,
-          "legendFormat": "Error rate",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Latency and Error rate",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "s",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 20
-      },
-      "id": 11,
-      "panels": [],
-      "repeat": null,
-      "repeatIteration": 1570482752333,
-      "repeatPanelId": 6,
-      "scopedVars": {
-        "addr": {
-          "selected": true,
-          "text": "/resource/test-0004",
-          "value": "/resource/test-0004"
-        }
-      },
-      "title": "$addr",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "description": "Throughput and Latency of $addr",
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 8,
-        "x": 0,
-        "y": 21
-      },
-      "id": 12,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1570482752333,
-      "repeatPanelId": 2,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "addr": {
-          "selected": true,
-          "text": "/resource/test-0004",
-          "value": "/resource/test-0004"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Throughput",
-          "color": "#73BF69",
-          "yaxis": 1
-        },
-        {
-          "alias": "Latency",
-          "color": "#5794F2",
-          "yaxis": 2
-        },
-        {
-          "alias": "Error rate",
-          "color": "#F2495C",
-          "yaxis": 2
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Throughput",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(request_seconds_sum:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Latency",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\", status!~\"2..\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "hide": true,
-          "intervalFactor": 1,
-          "legendFormat": "Error rate",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Throughput and Latency",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "reqps",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "s",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "description": "Throughput and Error rate of $addr",
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 8,
-        "x": 8,
-        "y": 21
-      },
-      "id": 13,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1570482752333,
-      "repeatPanelId": 3,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "addr": {
-          "selected": true,
-          "text": "/resource/test-0004",
-          "value": "/resource/test-0004"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Throughput",
-          "color": "#73BF69",
-          "yaxis": 1
-        },
-        {
-          "alias": "Latency",
-          "color": "#5794F2",
-          "yaxis": 2
-        },
-        {
-          "alias": "Error rate",
-          "color": "#F2495C",
-          "yaxis": 2
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Throughput",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(request_seconds_sum:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "hide": true,
-          "intervalFactor": 1,
-          "legendFormat": "Latency",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\", status!~\"2..\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 1,
-          "legendFormat": "Error rate",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Throughput and Error rate",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "reqps",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "description": "Latency and Error rate of $addr",
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 8,
-        "x": 16,
-        "y": 21
-      },
-      "id": 14,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "options": {},
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "repeatIteration": 1570482752333,
-      "repeatPanelId": 4,
-      "repeatedByRow": true,
-      "scopedVars": {
-        "addr": {
-          "selected": true,
-          "text": "/resource/test-0004",
-          "value": "/resource/test-0004"
-        }
-      },
-      "seriesOverrides": [
-        {
-          "alias": "Throughput",
-          "color": "#73BF69",
-          "yaxis": 1
-        },
-        {
-          "alias": "Latency",
-          "color": "#5794F2",
-          "yaxis": 1
-        },
-        {
-          "alias": "Error rate",
-          "color": "#F2495C",
-          "yaxis": 2
-        }
-      ],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "hide": true,
-          "intervalFactor": 1,
-          "legendFormat": "Throughput",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(request_seconds_sum:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "legendFormat": "Latency",
-          "refId": "B"
-        },
-        {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\", status!~\"2..\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
-          "format": "time_series",
-          "hide": false,
-          "intervalFactor": 1,
-          "legendFormat": "Error rate",
-          "refId": "C"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Latency and Error rate",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "s",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": "0",
-          "show": true
-        },
-        {
-          "format": "percentunit",
-          "label": null,
-          "logBase": 1,
-          "max": "1",
-          "min": "0",
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": true,
-        "alignLevel": null
-      }
     }
   ],
   "schemaVersion": 18,
@@ -1235,12 +635,8 @@
       {
         "allValue": null,
         "current": {
-          "text": "/resource/test-0001 + /resource/test-0003 + /resource/test-0004",
-          "value": [
-            "/resource/test-0001",
-            "/resource/test-0003",
-            "/resource/test-0004"
-          ]
+          "text": "/resource/test-0001",
+          "value": "/resource/test-0001"
         },
         "datasource": "prometheus",
         "definition": "request_seconds_count:irate",
@@ -1314,7 +710,7 @@
     ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {
@@ -1345,5 +741,5 @@
   "timezone": "",
   "title": "Google's Golden Rules",
   "uid": "58FdwEhZk",
-  "version": 2
+  "version": 1
 }
