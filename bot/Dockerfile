@@ -7,7 +7,7 @@ WORKDIR /app
 
 RUN npm install -dd
 
-COPY /src /app
+COPY . /app
 
 FROM node:lts-alpine as RUNNER
 
