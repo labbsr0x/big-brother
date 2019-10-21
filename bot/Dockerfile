@@ -1,22 +1,23 @@
-FROM abilioesteves/gowebbuilder:1.2.0 as BUILDER
+FROM node:lts as BUILDER
 
-WORKDIR /src/
+USER root
 
-ADD go.mod .
-ADD go.sum .
+COPY /package.json /app/package.json
+WORKDIR /app
 
-RUN go mod download
+RUN npm install -dd
 
-ADD . .
+COPY /src /app
 
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /bot main.go
+FROM node:lts-alpine as RUNNER
 
-FROM alpine as RUNNER
+WORKDIR /app
 
 # ENVS
+ENV ETCD_URLS ""
 
 # SETUP
-COPY --from=BUILDER /bot /
+COPY --from=BUILDER /app /app
 
 # RUN
-CMD [ "/bot", "serve" ]
+CMD [ "npm", "start" ]

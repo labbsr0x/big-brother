@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+bot/bot
 
 # Test binary, build with `go test -c`
 *.test
@@ -34,3 +35,6 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
+# Node js
+node_modules
