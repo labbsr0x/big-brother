@@ -12,7 +12,7 @@ services:
   etcd:
     image: quay.io/coreos/etcd:v3.2.25
     ports:
-      - 2379
+      - 2379:2379
     environment:
       - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
       - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
