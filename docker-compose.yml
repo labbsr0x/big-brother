@@ -5,12 +5,14 @@ services:
   # big brother is defined below by a collection of services: a bot, etcd, monitor, alertmanager and grafana
 
   bot:
-    image: labbsr0x/big-brother-bot:latest
     build:
       context: bot
       dockerfile: Dockerfile
+    image: labbsr0x/big-brother-bot:latest
     environment:
-      - LOG_LEVEL=debug
+      - ETCD_URLS=http://etcd:2379
+    ports:
+      - 3001:3000
     depends_on:
       - alertmanager
     volumes:
