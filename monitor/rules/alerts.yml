@@ -7,3 +7,115 @@ groups:
     annotations:
       description: A dependência {{$labels.name}} do serviço {{$labels.prsn}} não está respondendo.
       summary: Alerta para caso uma dependência passe mais de 2 minutos sem resposta
+
+- name: suddenly_high_latency
+  rules:
+  - record: request_seconds_latency
+    expr:
+      sum by (addr, prsn, method, status, type) (request_seconds_sum:irate)
+      /
+      sum by (addr, prsn, method, status, type) (request_seconds_count:irate)
+
+  - record: request_seconds_latency:avg_max
+    expr:
+      avg_over_time(
+        max_over_time(
+          avg_over_time(
+            (sum by (addr, prsn, method, status, type) (request_seconds_sum:irate)
+            /
+            sum by (addr, prsn, method, status, type) (request_seconds_count:irate))
+          [1m:])
+        [20m:])
+      [1h:])
+
+
+  - alert: request_seconds_count_latency_increase_10_percent
+    expr:
+      (
+        ( requests_seconds_latency * 100)
+        /
+        ( request_seconds_latency:avg_max * 100)
+      ) >= 1.1
+    for: 5m
+    labels:
+      severity: minor
+      type_signal: latency
+    annotations:
+      description: O recurso no endereço {{$labels.addr}} do serviço {{$labels.prsn}} está com um aumento da latência em 10%.
+      summary: Alerta para as requisições que, com base na média dos máximos histórico de uma hora, tenha um aumento no tempo de resposta em 10% por mais de cinco minutos.
+
+  - alert: request_seconds_count_latency_increase_10_percent
+    expr:
+      (
+        ( requests_seconds_latency * 100)
+        /
+        ( request_seconds_latency:avg_max * 100)
+      ) >= 1.1
+    for: 5m
+    labels:
+      severity: warning
+      type_signal: latency
+    annotations:
+      description: O recurso no endereço {{$labels.addr}} do serviço {{$labels.prsn}} está com um aumento da latência em 10%.
+      summary: Alerta para as requisições que, com base na média dos máximos histórico de uma hora, tenha um aumento no tempo de resposta em 10% por mais de cinco minutos.
+
+  - alert: request_seconds_count_latency_increase_20_percent
+    expr:
+      (
+        ( requests_seconds_latency * 100)
+        /
+        ( request_seconds_latency:avg_max * 100)
+      ) >= 1.2
+    for: 5m
+    labels:
+      severity: minor
+      type_signal: latency
+    annotations:
+      description: O recurso no endereço {{$labels.addr}} do serviço {{$labels.prsn}} está com um aumento da latência em 20%.
+      summary: Alerta para as requisições que, com base na média dos máximos histórico de uma hora, tenha um aumento no tempo de resposta em 20% por mais de cinco minutos.
+
+  - alert: request_seconds_count_latency_increase_50_percent
+    expr:
+      (
+        ( requests_seconds_latency * 100)
+        /
+        ( request_seconds_latency:avg_max * 100)
+      ) >= 1.5
+    for: 5m
+    labels:
+      severity: normal
+      type_signal: latency
+    annotations:
+      description: O recurso no endereço {{$labels.addr}} do serviço {{$labels.prsn}} está com um aumento da latência em 50%.
+      summary: Alerta para as requisições que, com base na média dos máximos histórico de uma hora, tenha um aumento no tempo de resposta em 50% por mais de cinco minutos.
+
+  - alert: request_seconds_count_latency_increase_90_percent
+    expr:
+      (
+        ( requests_seconds_latency * 100)
+        /
+        ( request_seconds_latency:avg_max * 100)
+      ) >= 1.9
+    for: 5m
+    labels:
+      severity: major
+      type_signal: latency
+    annotations:
+      description: O recurso no endereço {{$labels.addr}} do serviço {{$labels.prsn}} está com um aumento da latência em 90%.
+      summary: Alerta para as requisições que, com base na média dos máximos histórico de uma hora, tenha um aumento no tempo de resposta em 90% por mais de cinco minutos.
+
+  - alert: request_seconds_count_latency_increase_100_percent
+    expr:
+      (
+        ( requests_seconds_latency * 100)
+        /
+        ( request_seconds_latency:avg_max * 100)
+      ) >= 2.0
+    for: 5m
+    labels:
+      severity: critical
+      type_signal: latency
+    annotations:
+      description: O recurso no endereço {{$labels.addr}} do serviço {{$labels.prsn}} está com um aumento da latência em 100%.
+      summary: Alerta para as requisições que, com base na média dos máximos histórico de uma hora, tenha um aumento no tempo de resposta em 100% por mais de cinco minutos.
+
