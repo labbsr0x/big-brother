@@ -1,0 +1,68 @@
+{
+  "id": "6b7d5478-d4e8-4ab0-b56d-e280af397986",
+  "name": "Change",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "c93c864b-936a-4f20-b198-c0f17ce373a1",
+          "required": true,
+          "dataType": "@sys.any",
+          "name": "ServiceName",
+          "value": "$ServiceName",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What is the service you\u0027d like to update?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "0fb9218c-118b-44a3-b92a-af6542a28e5a",
+          "required": true,
+          "dataType": "@sys.any",
+          "name": "ServiceURL",
+          "value": "$ServiceURL",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What is the new bb-promster URL for this service?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "condition": "",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": true,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

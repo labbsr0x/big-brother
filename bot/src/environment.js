@@ -11,7 +11,7 @@ function loadEnvs() {
 
     return {
         'ETCD_URLS': ETCD_URLS.split(",")
-    }
+    };
 };
 
 

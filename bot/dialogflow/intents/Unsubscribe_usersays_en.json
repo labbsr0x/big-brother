@@ -1,0 +1,62 @@
+[
+  {
+    "id": "835d0aea-9a5c-498f-bff5-dc34469fd0d6",
+    "data": [
+      {
+        "text": "Would be nice to unsubscribe to a service",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "670b1315-8419-4545-b6f9-909234439bd7",
+    "data": [
+      {
+        "text": "Please, unsubscribe to an app",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "32f7e357-d511-4913-9b70-4b78cf39ac10",
+    "data": [
+      {
+        "text": "Unsub",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "2d606b6a-97be-4f56-91bd-914f463fbb0b",
+    "data": [
+      {
+        "text": "I would like to unsubscribe to a service",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d87d2105-f494-445c-a054-54130fed1723",
+    "data": [
+      {
+        "text": "Unsubscribe",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

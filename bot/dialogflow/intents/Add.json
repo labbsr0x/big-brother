@@ -1,0 +1,56 @@
+{
+  "id": "20a0024b-3fd5-4679-b33e-f8162da014d9",
+  "name": "Add",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "ef0d6c15-6dd5-4da5-8d34-4bf4bda36db5",
+          "required": true,
+          "dataType": "@sys.any",
+          "name": "ServiceName",
+          "value": "$ServiceName",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        },
+        {
+          "id": "39118e62-7ff4-44c3-aeec-245257a321df",
+          "required": true,
+          "dataType": "@sys.url",
+          "name": "ServiceURL",
+          "value": "$ServiceURL",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "condition": "",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": true,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

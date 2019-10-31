@@ -5,14 +5,14 @@ const { Payload } = require('dialogflow-fulfillment');
  * @param {String} title the message text before the options
  * @param {String[]} texts
  */
-function getTelegramButtons(title, texts) {
+function getTelegramButtons(title, texts, callbackPrefix = "") {
     let inline_keyboard = [];
     let row = 0;
     for (let i = 0; i < texts.length; i = i + 2) {
         inline_keyboard.push([]);
-        inline_keyboard[row].push({text: texts[i], callback_data: texts[i]});
+        inline_keyboard[row].push({text: texts[i], callback_data: callbackPrefix + texts[i]});
         if (i+1 < texts.length ){
-            inline_keyboard[row].push({text: texts[i+1], callback_data: texts[i+1]});
+            inline_keyboard[row].push({text: texts[i+1], callback_data: callbackPrefix + texts[i+1]});
         }
         row++;
     }
@@ -22,7 +22,6 @@ function getTelegramButtons(title, texts) {
             inline_keyboard: inline_keyboard
         }
     };
-    console.log("Payload: " + JSON.stringify(payload));
     return new Payload("TELEGRAM", payload, {sendAsMessage: true});
 }
 

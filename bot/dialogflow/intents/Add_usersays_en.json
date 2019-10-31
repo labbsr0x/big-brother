@@ -1,0 +1,86 @@
+[
+  {
+    "id": "294a4a1d-41d0-45a6-9d37-82ef9007e6a8",
+    "data": [
+      {
+        "text": "New",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "76ee3f33-0c23-4b72-8f40-1c14f53cb60a",
+    "data": [
+      {
+        "text": "Add",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d0851824-5e9a-4284-8524-1242ec512f62",
+    "data": [
+      {
+        "text": "I\u0027d like to see alerts for a new application",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "4492f24a-3d25-46be-9442-251bf2fe8b18",
+    "data": [
+      {
+        "text": "I\u0027d like to get alerts for a new application",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "bcdc9f5a-d372-407d-8104-20c7c2aef51f",
+    "data": [
+      {
+        "text": "I would like to observe a new service",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "77070b24-eba7-45b1-aadd-fbd41429e399",
+    "data": [
+      {
+        "text": "I would like to add a new service to be watched",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "d796f30f-3fa5-46e6-85d0-fd6b4753959d",
+    "data": [
+      {
+        "text": "I\u0027d like to add a new service to be watched",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

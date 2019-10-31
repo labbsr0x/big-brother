@@ -15,5 +15,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(3000,  () => {
-    console.log("Started!")
+    console.log("Started!");
 });

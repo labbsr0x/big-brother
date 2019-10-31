@@ -1,0 +1,46 @@
+{
+  "id": "2a390c5a-7b32-4cc5-b664-6323699a1ec8",
+  "name": "Subscribe",
+  "auto": true,
+  "contexts": [
+    "subscribe"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "76430a1f-63ed-406c-8f94-f4c0600d9c86",
+          "required": true,
+          "dataType": "@sys.any",
+          "name": "ServiceName",
+          "value": "$ServiceName",
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "condition": "",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": true,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

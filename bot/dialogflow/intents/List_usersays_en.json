@@ -1,0 +1,50 @@
+[
+  {
+    "id": "33df82e1-0d2b-4ffa-a847-36cda1e0a057",
+    "data": [
+      {
+        "text": "List all apps to me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f4ebbaec-f620-4fba-9798-645dd6e51757",
+    "data": [
+      {
+        "text": "Please, list to me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "3aa9ceee-646c-4bb0-a686-762ae605db75",
+    "data": [
+      {
+        "text": "Could you please list the available applications?",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "82666286-a46c-42da-bab4-812fb0ca4112",
+    "data": [
+      {
+        "text": "List",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

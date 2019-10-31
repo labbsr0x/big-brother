@@ -1,0 +1,50 @@
+[
+  {
+    "id": "7624b787-cc09-4aa9-9d09-51f57be1ad63",
+    "data": [
+      {
+        "text": "I need help setting up my observation cluster",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "f80c83a3-1a9a-4a48-9678-d1ec0318533e",
+    "data": [
+      {
+        "text": "I would like to be helped",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "c04e1f8a-2f0a-4f75-8cda-41017561d3f5",
+    "data": [
+      {
+        "text": "Please, help me",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "6db792f5-57a8-4324-965f-6bf8ca3c5ebf",
+    "data": [
+      {
+        "text": "Help!",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

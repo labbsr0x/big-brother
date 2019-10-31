@@ -1,0 +1,50 @@
+{
+  "id": "a2b09dac-fff2-4e71-97c8-c749cebf7488",
+  "name": "Unsubscribe",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "e1dbbdc6-a81a-46db-bc25-70353e00d52b",
+          "required": true,
+          "dataType": "@sys.any",
+          "name": "ServiceName",
+          "value": "$ServiceName",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What is the name of the service you\u0027d like to unsubscribe?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "condition": "",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": true,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

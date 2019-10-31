@@ -3,12 +3,12 @@
  */
 
 const { WebhookClient, Text, Card, Image, Suggestion, Payload } = require('dialogflow-fulfillment');
-const { getTelegramButtons } = require('./misc')
-const { listApps } = require('./db')
+const { getTelegramButtons } = require('./misc');
+const { listApps, addApp, rmApp } = require('./db');
 const intentMap = new Map();
 
 const actions = [
-    "List all apps being watched by me",
+    "List all apps being monitored",
     "Subscribe to alerts",
     "Unsubscribe to alerts",
     "Add a new app",
@@ -30,20 +30,33 @@ function welcome(agent){
  * @param {WebhookClient} agent a dialogflow fulfillment webhook client
  */
 function list(agent) {
-    let apps = listApps();
-    if (apps.length > 0) {
-        agent.add(getTelegramButtons("Here is the list of apps I'm watching right now.\nClick one to subscribe:", apps));
-    } else {
-        agent.add("At this moment, there are no apps being watched by me!")
-    }
+    return listApps().then((apps) => {
+        if (apps.length > 0) {
+            agent.add(getTelegramButtons("Here is the list of apps I'm watching right now.\nClick one to subscribe:", apps, "Subscribe to "));
+        } else {
+            agent.add("At this moment, there are no apps being watched by me!");
+        }
+    });
 }
 
 /**
- * Handles the Subscription of one or more apps
+ * Handles the Subscription intent of one or more apps
  * @param {WebhookClient} agent a dialogflow fulfillment webhook client
  */
 function subscribe(agent) {
-    // TODO
+    return listApps().then((apps) => {
+        let serviceName = agent.parameters.ServiceName;
+        if (apps.length > 0) {
+            if (serviceName) {
+                // TODO: integrate with DB
+                agent.add(`Subscribed to service '${serviceName}'`);
+            } else {
+                agent.add(getTelegramButtons("Please select one of the options bellow:", apps, "Subscribe to "));
+            }
+        } else {
+            agent.add("There are no apps being monitored at this time");
+        }
+    });
 }
 
 /**
@@ -51,39 +64,80 @@ function subscribe(agent) {
  * @param {WebhookClient} agent a dialogflow fulfillment webhook client
  */
 function unsubscribe(agent) {
-    // TODO
+    return listApps().then((apps) => {
+        let serviceName = agent.parameters.ServiceName;
+
+        if (apps.length > 0) {
+            if (serviceName) {
+                // TODO: integrate with DB
+                agent.end(`Unsubscribed to service '${serviceName}'!`);
+            } else {
+                agent.add("What is the name of the service you'd like to unsubscribe?");
+            }
+        } else {
+            agent.end("There are no apps being monitored");
+        }
+    });
 }
 
 /**
  * Handles the Addition of a new app to be observed by Big Brother
  * @param {WebhookClient} agent a dialogflow fulfillment webhook client
  */
-function addApp(agent) {
-    // TODO
+function add(agent) {
+    let serviceName = agent.parameters.ServiceName;
+    let serviceURL = agent.parameters.ServiceURL;
+
+    if (serviceName && serviceURL) {
+        addApp(serviceName, serviceURL);
+        agent.end(`Service '${serviceName}' added!`);
+    } else if (!serviceName) {
+        agent.add("What is the name of the service you'd like to add?");
+    } else if (!serviceURL) {
+        agent.add("What is the bb-promster of the service you'd like to add?");
+    }
 }
 
 /**
  * Handles the Removal of one app that is currently being observed by Big Brother
  * @param {WebhookClient} agent a dialogflow fulfillment webhook client
  */
-function removeApp(agent) {
-    // TODO
+function remove(agent) {
+    return listApps().then((apps) => {
+        let serviceName = agent.parameters.ServiceName;
+        if (apps.length > 0) {
+            if (serviceName) {
+                rmApp(serviceName);
+                agent.add(`Stopped monitoring ${serviceName}`);
+            } else {
+                agent.add(getTelegramButtons("Please select one of the options bellow:", apps));
+            }
+        } else {
+            agent.end("There are no apps being monitored");
+        }
+    });
 }
 
 /**
  * Handles the Update of an app that is currently being observer by Big Brother
  * @param {WebhookClient} agent a dialogflow fulfillment webhook client
  */
-function changeApp(agent) {
-    // TODO
-}
+function change(agent) {
+    return listApps().then((apps) => {
+        let serviceName = agent.parameters.ServiceName;
+        let newServiceURL = agent.parameters.ServiceURL;
 
-/**
- * Gives instructions on how to setup the observation cluster for Big Brother
- * @param {WebhookClient} agent a dialogflow fulfillment webhook client
- */
-function help(agent) {
-    // TODO
+        if (apps.length > 0) {
+            if (serviceName && newServiceURL) {
+                rmApp(serviceName);
+                addApp(serviceName, newServiceURL);
+            } else if (!serviceName) {
+                agent.add(getTelegramButtons("Please select one of the options bellow:", apps));
+            }
+        } else {
+            agent.end("There are no apps being monitored!");
+        }
+    })
 }
 
 /**
@@ -93,7 +147,13 @@ function help(agent) {
  */
 function messageHandler(req, res) {
     let agent = new WebhookClient({'request': req, 'response': res});
-    agent.handleRequest(intentMap);
+    console.log("session: " + JSON.stringify(agent.session));
+    console.log("request source: " + JSON.stringify(agent.requestSource));
+    console.log("query: " + JSON.stringify(agent.query));
+    console.log("" + JSON.stringify(agent.originalRequest));
+    agent.handleRequest(intentMap).then((res) => {
+
+    });
 }
 
 /**
@@ -102,13 +162,12 @@ function messageHandler(req, res) {
  */
 function init() {
     intentMap.set("Default Welcome Intent", welcome);
-    intentMap.set("list", list);
-    intentMap.set("subscribe", subscribe);
-    intentMap.set("unsubscribe", unsubscribe);
-    intentMap.set("add", addApp);
-    intentMap.set("remove", removeApp);
-    intentMap.set("change", changeApp);
-    intentMap.set("help", help);
+    intentMap.set("List", list);
+    intentMap.set("Subscribe", subscribe);
+    intentMap.set("Unsubscribe", unsubscribe);
+    intentMap.set("Add", add);
+    intentMap.set("Remove", remove);
+    intentMap.set("Change", change);
     return {
         messageHandler
     }

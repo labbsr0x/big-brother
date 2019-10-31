@@ -1,0 +1,62 @@
+[
+  {
+    "id": "b1cebeed-c1ca-43ca-950d-b1d840be9fcd",
+    "data": [
+      {
+        "text": "Please, remove",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "40d81ea0-3189-4a6b-b7ff-7b240511aa2c",
+    "data": [
+      {
+        "text": "Remove an app",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "b7740849-2d90-47b9-8f11-3a8f45c33133",
+    "data": [
+      {
+        "text": "Remove a service",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "3cbd668d-50c5-4e40-bbe9-ac6106d3a330",
+    "data": [
+      {
+        "text": "Please remove an app",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "15de910a-c77d-42ee-b3c5-60e0e827d3cf",
+    "data": [
+      {
+        "text": "Remove",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

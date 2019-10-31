@@ -1,0 +1,50 @@
+{
+  "id": "ad3942bf-ee3a-43b6-a871-b4fa0723ff7f",
+  "name": "Remove",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "ce4dd79b-5926-4910-ab8e-2598c6fe10ef",
+          "required": true,
+          "dataType": "@sys.any",
+          "name": "ServiceName",
+          "value": "$ServiceName",
+          "prompts": [
+            {
+              "lang": "en",
+              "value": "What service you\u0027d like me stop monitoring?"
+            }
+          ],
+          "promptMessages": [],
+          "noMatchPromptMessages": [],
+          "noInputPromptMessages": [],
+          "outputDialogContexts": [],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "lang": "en",
+          "condition": "",
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": true,
+  "fallbackIntent": false,
+  "events": [],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

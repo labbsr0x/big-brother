@@ -1,0 +1,113 @@
+[
+  {
+    "id": "ea2d34fd-0cf3-40fe-9c87-48efe65fd3c5",
+    "data": [
+      {
+        "text": "Subscribe to alerts",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "3691ca1b-f50f-4952-b640-8e49bdde3ea1",
+    "data": [
+      {
+        "text": "I would like to subscribe to ",
+        "userDefined": false
+      },
+      {
+        "text": "Service",
+        "alias": "ServiceName",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "bd51d937-4dfb-407b-b985-6d69d5d0b19d",
+    "data": [
+      {
+        "text": "Sub to ",
+        "userDefined": false
+      },
+      {
+        "text": "Service",
+        "alias": "ServiceName",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "e2d4cd65-f4a9-4bdb-8d82-b1d3af690185",
+    "data": [
+      {
+        "text": "I would very much appreciate if I could subscribe to an app",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "07119f5a-8ae1-45d6-979c-ea0f03b51013",
+    "data": [
+      {
+        "text": "Subscribe to ",
+        "userDefined": false
+      },
+      {
+        "text": "one",
+        "meta": "@sys.ignore",
+        "userDefined": false
+      },
+      {
+        "text": " apps",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "5dc6faa8-e344-407a-87bc-581efb883a5e",
+    "data": [
+      {
+        "text": "Subscribe to ",
+        "userDefined": false
+      },
+      {
+        "text": "Service Name",
+        "alias": "ServiceName",
+        "meta": "@sys.any",
+        "userDefined": true
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  },
+  {
+    "id": "c2d6392e-051f-4b1d-abb2-42ea19f2ead2",
+    "data": [
+      {
+        "text": "I\u0027d like to subscribe to an app",
+        "userDefined": false
+      }
+    ],
+    "isTemplate": false,
+    "count": 0,
+    "updated": 0
+  }
+]

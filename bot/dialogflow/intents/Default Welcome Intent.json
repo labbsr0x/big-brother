@@ -1,0 +1,75 @@
+{
+  "id": "eba768ed-206e-40ae-84a6-1e54be6bcbae",
+  "name": "Default Welcome Intent",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "input.welcome",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 4,
+          "platform": "telegram",
+          "lang": "en",
+          "condition": "",
+          "payload": {
+            "telegram": {
+              "text": "Pick a color",
+              "reply_markup": {
+                "inline_keyboard": [
+                  [
+                    {
+                      "text": "Red",
+                      "callback_data": "Red"
+                    }
+                  ],
+                  [
+                    {
+                      "text": "Green",
+                      "callback_data": "Green"
+                    }
+                  ],
+                  [
+                    {
+                      "text": "Yellow",
+                      "callback_data": "Yellow"
+                    }
+                  ],
+                  [
+                    {
+                      "text": "Blue",
+                      "callback_data": "Blue"
+                    }
+                  ],
+                  [
+                    {
+                      "text": "Pink",
+                      "callback_data": "Pink"
+                    }
+                  ]
+                ]
+              }
+            }
+          }
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "fallbackIntent": false,
+  "events": [
+    {
+      "name": "WELCOME"
+    }
+  ],
+  "conditionalResponses": [],
+  "condition": "",
+  "conditionalFollowupEvents": []
+}

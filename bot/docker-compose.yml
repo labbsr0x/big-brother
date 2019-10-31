@@ -6,6 +6,7 @@ services:
     image: labbsr0x/big-brother-bot:latest
     environment:
       - ETCD_URLS=http://etcd:2379
+      - DEBUG=*
     ports:
       - 3000:3000
 
