@@ -32,10 +32,9 @@ In detail:
 The following libraries make part of **Big Brother** official libraries:
 
 1. [`express-monitor`](https://github.com/labbsr0x/express-monitor) for the Node JS Express framework.
-1. [TODO] `iris-monitor` for the Katara's Iris web framework;
-2. [TODO] `mux-monitor` for the Gorilla's Mux web framework;
-3. [TODO] `spring-monitor` for the Pivotal's Spring web framework;
-4. [TODO] `ejb-monitor` for Enterprise Java Bean web frameworks;
+2. [`servlet-monitor`](https://github.com/labbsr0x/servlet-monitor) for the Java ecosystem
+3. [TODO] `iris-monitor` for the Katara's Iris web framework;
+4. [TODO] `mux-monitor` for the Gorilla's Mux web framework;
 
 Without these, you would have to expose the metrics by yourself, possibly leading to inconsistencies and other errors when setting up your app's observability infrastructure with **Big Brother**.   
 
