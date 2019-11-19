@@ -84,20 +84,25 @@ Gets configured by:
 
 # How to Run
 
-Type the following commands in your terminal:
+1. Talk to Telegram's Bot Father, create your own bot and get it's Telegram Token;
+2. Open a Dialogdlow account, create a new project and import the configs from the folder `bot/dialogflow`;
+3. Setup a Telegram integration with the Token obtained in step 1;
+4. Expose your `port 3001` and inform a reachable address to the Dialogflow fulfillment configuration; 
+5. Type the following commands in your terminal to interact with your bot directly through Telegram:
 
 ```bash
-TELEGRAM_ADMIN=<yourid> TELEGRAM_TOKEN=<XXXXX:YYYYYY> docker-compose up -d --build
+TELEGRAM_TOKEN=<XXXXX:YYYYYY> docker-compose up -d --build
 ```
 
 This will run an example app with its own `bb-promster` cluster and the **Big Brother** app with its components.
 
-By running:
-```bash
-docker-compose exec --env ETCDCTL_API=3 etcd etcdctl put "/clients/Example/example-bb-promster:9090" -- ""
-```
+5. Now go to the bot on Telegram, and add a new App. Inform the App name (e.g. `Example`) and the app address (e.g. `example-bb-promster:9090`). You'll be automatically subscribed to the app you've just added.
 
-The client app `bb-promster` cluster will get registered to the **Big Brother's** ETCD and **Big Brother** will then start collecting metrics by federating it.
+The example client app `bb-promster` cluster will get registered to the **Big Brother's** ETCD and **Big Brother** will then start collecting metrics by federating it.
+
+Open your browser on `http://localhost:3000` to access the provided Grafana dashboard (user `bigbrother`, password `bigbrother`).
+
+Also, access `http://localhost:3001/test` on your browser to dispatch test alerts and see if you get them at your Telegram chat. 
 
 # Trivia
 
