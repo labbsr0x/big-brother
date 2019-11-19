@@ -3,6 +3,8 @@ This project defines a service to effectively communicate observability events t
 
 # How does it work
 
+![motive](https://raw.githubusercontent.com/labbsr0x/big-brother/assets/bigbrother.png "design")
+
 Basically, it collects the necessary metrics from a client provided `bb-promster` cluster endpoint.
 
 More specifically, the **Big Brother** app federates it's own monitoring cluster to the provided endpoint, and starts collecting **Big Brother** specific metrics, with the help of some useful programming libraries.
