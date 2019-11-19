@@ -14,10 +14,10 @@ These metrics are treated as the fundamental protocol behind **Big Brother's** c
 A valid **Big Brother** library should expose the following metrics: 
 
 ```
-request_seconds_bucket{type, status, method, addr, le}
-request_seconds_count{type, status, method, addr}
-request_seconds_sum{type, status, method, addr}
-response_size_bytes{type, status, method, addr}
+request_seconds_bucket{type, status, isError, method, addr, le}
+request_seconds_count{type, status, isError, method, addr}
+request_seconds_sum{type, status, isError, method, addr}
+response_size_bytes{type, status, isError, method, addr}
 dependency_up{name}
 ```
 
@@ -90,13 +90,13 @@ Gets configured by:
 4. Expose your `port 3001` and inform a reachable address to the Dialogflow fulfillment configuration; 
 5. Type the following commands in your terminal to interact with your bot directly through Telegram:
 
-```bash
-TELEGRAM_TOKEN=<XXXXX:YYYYYY> docker-compose up -d --build
-```
+   ```bash
+   TELEGRAM_TOKEN=<XXXXX:YYYYYY> docker-compose up -d --build
+   ```
 
-This will run an example app with its own `bb-promster` cluster and the **Big Brother** app with its components.
+   This will run an example app with its own `bb-promster` cluster and the **Big Brother** app with its components.
 
-5. Now go to the bot on Telegram, and add a new App. Inform the App name (e.g. `Example`) and the app address (e.g. `example-bb-promster:9090`). You'll be automatically subscribed to the app you've just added.
+6. Now go to the bot on Telegram, and add a new App. Inform the App name (e.g. `Example`) and the app address (e.g. `example-bb-promster:9090`). You'll be automatically subscribed to the app you've just added.
 
 The example client app `bb-promster` cluster will get registered to the **Big Brother's** ETCD and **Big Brother** will then start collecting metrics by federating it.
 
