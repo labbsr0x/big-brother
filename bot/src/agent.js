@@ -4,7 +4,7 @@
 
 const { WebhookClient, Text, Card, Image, Suggestion, Payload } = require('dialogflow-fulfillment');
 const { getTelegramButtons } = require('./misc');
-const { listApps, addApp, rmApp } = require('./db');
+const { listApps, addApp, rmApp, subscribeToApp, unsubscribeToApp } = require('./db');
 const intentMap = new Map();
 
 const actions = [
@@ -48,7 +48,7 @@ function subscribe(agent) {
         let serviceName = agent.parameters.ServiceName;
         if (apps.length > 0) {
             if (serviceName) {
-                // TODO: integrate with DB
+                subscribeToApp(serviceName, agent.originalRequest.payload.chat.id);
                 agent.add(`Subscribed to service '${serviceName}'`);
             } else {
                 agent.add(getTelegramButtons("Please select one of the options bellow:", apps, "Subscribe to "));
@@ -66,10 +66,9 @@ function subscribe(agent) {
 function unsubscribe(agent) {
     return listApps().then((apps) => {
         let serviceName = agent.parameters.ServiceName;
-
         if (apps.length > 0) {
             if (serviceName) {
-                // TODO: integrate with DB
+                unsubscribeToApp(agent.originalRequest.payload.chat.id);
                 agent.end(`Unsubscribed to service '${serviceName}'!`);
             } else {
                 agent.add("What is the name of the service you'd like to unsubscribe?");
@@ -147,13 +146,8 @@ function change(agent) {
  */
 function messageHandler(req, res) {
     let agent = new WebhookClient({'request': req, 'response': res});
-    console.log("session: " + JSON.stringify(agent.session));
-    console.log("request source: " + JSON.stringify(agent.requestSource));
-    console.log("query: " + JSON.stringify(agent.query));
-    console.log("" + JSON.stringify(agent.originalRequest));
-    agent.handleRequest(intentMap).then((res) => {
 
-    });
+    agent.handleRequest(intentMap);
 }
 
 /**

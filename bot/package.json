@@ -25,9 +25,11 @@
     "dialogflow-fulfillment": "^0.6.0",
     "etcd3": "^0.2.13",
     "express": "^4.17.1",
-    "grpc": "^1.24.1"
+    "grpc": "^1.24.1",
+    "https": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.7.2",
     "@babel/register": "^7.6.2"
   }
 }
