@@ -21,7 +21,7 @@ response_size_bytes{type, status, isError, method, addr}
 dependency_up{name}
 ```
 
-Where, for a specific request, `type` tells which request protocol was used (e.g. `grpc` or `http`), `status` registers the response status code, `method` registers the request method and `addr` registers the requested endpoint address.
+Where, for a specific request, `type` tells which request protocol was used (e.g. `grpc` or `http`), `status` registers the response status code, `isError` let you know if this response status is considered an error, `method` registers the request method and `addr` registers the requested endpoint address.
 
 In detail:
 
@@ -110,4 +110,4 @@ The name is inspired by George Orwell's 1984 **Big Brother** character.
 
 In this book, **Big Brother** is an entity that is *omniconscious*, being able to watch everyone, everywhere. 
 
-This is exactly what we aim to achieve with this project: a way for you to easily and effective watch every project you have without any prior knowledge of observability concepts and Prometheus best practices. 
+This is exactly what we aim to achieve with this project: a way for you to easily and effectively watch every project you have without any prior knowledge of observability concepts and Prometheus best practices. 
