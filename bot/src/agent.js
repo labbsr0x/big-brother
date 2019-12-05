@@ -68,7 +68,7 @@ function unsubscribe(agent) {
         let serviceName = agent.parameters.ServiceName;
         if (apps.length > 0) {
             if (serviceName) {
-                unsubscribeToApp(agent.originalRequest.payload.chat.id);
+                unsubscribeToApp(agent.originalRequest.payload.chat.from.id);
                 agent.end(`Unsubscribed to service '${serviceName}'!`);
             } else {
                 agent.add("What is the name of the service you'd like to unsubscribe?");
@@ -146,7 +146,7 @@ function change(agent) {
  */
 function messageHandler(req, res) {
     let agent = new WebhookClient({'request': req, 'response': res});
-
+    console.log("ORIGINAL REQUEST: " + agent.originalRequest);
     agent.handleRequest(intentMap);
 }
 
