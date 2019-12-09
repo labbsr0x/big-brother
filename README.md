@@ -14,14 +14,12 @@ These metrics are treated as the fundamental protocol behind **Big Brother's** c
 A valid **Big Brother** library should expose the following metrics: 
 
 ```
-request_seconds_bucket{type, status, isError, method, addr, le}
-request_seconds_count{type, status, isError, method, addr}
-request_seconds_sum{type, status, isError, method, addr}
-response_size_bytes{type, status, isError, method, addr}
-dependency_up{name}
+request_seconds_bucket{type, status, isError, method, addr, version, le}
+request_seconds_count{type, status, isError, method, version, addr}
+request_seconds_sum{type, status, isError, method, version, addr}
+response_size_bytes{type, status, isError, method, version, addr}
+dependency_up{name, version}
 ```
-
-Where, for a specific request, `type` tells which request protocol was used (e.g. `grpc` or `http`), `status` registers the response status code, `isError` let you know if this response status is considered an error, `method` registers the request method and `addr` registers the requested endpoint address.
 
 In detail:
 
@@ -30,6 +28,19 @@ In detail:
 3. The `request_seconds_sum` is a counter that counts the overall sum of how long the requests with those exact label occurrences are taking;
 4. The `response_size_bytes` is a counter that computes how much data is being sent back to the user for a given request type. It captures the response size from the `content-length` response header. If there is no such header, the value exposed as metric will be zero;
 5. Finally, `dependency_up` is a metric to register weather a specific dependency is up (1) or down (0). The label `name` registers the dependency name;
+
+## Labels
+
+For a specific request:
+
+1. `type` tells which request protocol was used (e.g. `grpc`, `http`, `<your custom protocol>`);
+2. `status` registers the response status code; 
+3. `isError` let you know if the request's response status is considered an error;
+4. `method` registers the request method (e.g. `GET` for http get requests);
+5. `addr` registers the requested endpoint address;
+6. and `version` tells which version of your service has handled the request;
+
+## Ecosystem
 
 The following libraries make part of **Big Brother** official libraries:
 
@@ -82,12 +93,12 @@ Gets configured by:
 2. `ETCD_URLS`: defines the ETCD cluster urls, separated by comma;
 3. `ALERT_MANAGER_URLS`: defines the alertmanager cluster urls;
 
-# How to Run
+# How to Run locally
 
 1. Talk to Telegram's Bot Father, create your own bot and get it's Telegram Token;
 2. Open a Dialogdlow account, create a new project and import the configs from the folder `bot/dialogflow`;
-3. Setup a Telegram integration with the Token obtained in step 1;
-4. Expose your `port 3001` and inform a reachable address to the Dialogflow fulfillment configuration; 
+3. Setup a Telegram integration with the Token obtained in `step 1`;
+4. Expose your `port 3001` and inform a reachable HTTPS address to the Dialogflow fulfillment configuration. We recommend using [ngrok](https://ngrok.com) for that; 
 5. Type the following commands in your terminal to interact with your bot directly through Telegram:
 
    ```bash

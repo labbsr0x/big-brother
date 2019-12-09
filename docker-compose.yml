@@ -11,8 +11,10 @@ services:
     image: labbsr0x/big-brother-bot:latest
     environment:
       - ETCD_URLS=http://etcd:2379
+      - TELEGRAM_TOKEN=<your telegram token>
+      - DEBUG=*
     ports:
-      - 3001:3000
+      - 3000:3000
     depends_on:
       - alertmanager
     volumes:

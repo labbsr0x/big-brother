@@ -6,7 +6,7 @@ services:
     image: labbsr0x/big-brother-bot:latest
     environment:
       - ETCD_URLS=http://etcd:2379
-      - TELEGRAM_TOKEN=971797257:AAHO-aMOfQlhSVKROHd_sL5lyroC9rxNpjg
+      - TELEGRAM_TOKEN=<your telegram token>
       - DEBUG=*
     ports:
       - 3000:3000
