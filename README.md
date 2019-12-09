@@ -18,7 +18,7 @@ request_seconds_bucket{type, status, isError, method, addr, version, le}
 request_seconds_count{type, status, isError, method, version, addr}
 request_seconds_sum{type, status, isError, method, version, addr}
 response_size_bytes{type, status, isError, method, version, addr}
-dependency_up{name, version}
+dependency_up{name}
 ```
 
 In detail:
