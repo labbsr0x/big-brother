@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1570136398967,
+  "iteration": 1576087168952,
   "links": [],
   "panels": [
     {
@@ -55,7 +55,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(sum_over_time(request_seconds_sum:irate{prsn=\"$Service\"}[1d])/sum_over_time(request_seconds_count:irate{prsn=\"$Service\"}[1d])) by (addr)",
+          "expr": "avg(sum_over_time(request_seconds_sum:irate[1d])/sum_over_time(request_seconds_count:irate[1d])) by (addr)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{addr}}",
@@ -148,7 +148,7 @@
           "displayAliasType": "Warning / Critical",
           "displayType": "Regular",
           "displayValueWithAlias": "Never",
-          "expr": "dependency_up{prsn=\"$Service\"}",
+          "expr": "dependency_up",
           "format": "time_series",
           "group": {
             "alias": "",
@@ -168,44 +168,12 @@
       "type": "bargauge"
     }
   ],
-  "refresh": "5s",
+  "refresh": "30s",
   "schemaVersion": 18,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": [
-      {
-        "allValue": null,
-        "current": {
-          "text": "Example",
-          "value": "Example"
-        },
-        "datasource": "prometheus",
-        "definition": "request_seconds_count:irate",
-        "hide": 0,
-        "includeAll": false,
-        "label": null,
-        "multi": false,
-        "name": "Service",
-        "options": [
-          {
-            "selected": true,
-            "text": "Example",
-            "value": "Example"
-          }
-        ],
-        "query": "request_seconds_count:irate",
-        "refresh": 0,
-        "regex": "/.*prsn=\"([^\"]*).*/",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      }
-    ]
+    "list": []
   },
   "time": {
     "from": "now-6h",

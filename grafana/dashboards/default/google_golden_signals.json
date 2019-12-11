@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1570483823834,
+  "iteration": 1576087263242,
   "links": [],
   "panels": [
     {
@@ -76,7 +76,7 @@
       ],
       "targets": [
         {
-          "expr": "topk(10,\n  sum(request_seconds_count:irate{prsn=\"$prsn\",status!~\"2..\"}) by (addr)\n  /\n  sum(request_seconds_count:irate{prsn=\"$prsn\"}) by (addr)\n)",
+          "expr": "topk(10,\n  sum(request_seconds_count:irate{status!~\"2..\"}) by (addr)\n  /\n  sum(request_seconds_count:irate) by (addr)\n)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{addr}}",
@@ -147,7 +147,7 @@
       ],
       "targets": [
         {
-          "expr": "topk(10,\n  sum(request_seconds_sum:irate{prsn=\"$prsn\"}) by (addr)\n  /\n  sum(request_seconds_count:irate{prsn=\"$prsn\"}) by (addr)\n)",
+          "expr": "topk(10,\n  sum(request_seconds_sum:irate) by (addr)\n  /\n  sum(request_seconds_count:irate) by (addr)\n)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{addr}}",
@@ -218,7 +218,7 @@
       ],
       "targets": [
         {
-          "expr": "topk(10,\n  sum(request_seconds_count:irate{prsn=\"$prsn\",status!~\"2..\"}) by (addr)\n)",
+          "expr": "topk(10,\n  sum(request_seconds_count:irate{status!~\"2..\"}) by (addr)\n)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "{{addr}}",
@@ -320,14 +320,14 @@
           "refId": "A"
         },
         {
-          "expr": "sum(request_seconds_sum:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
+          "expr": "sum(request_seconds_sum:irate{addr=\"$addr\", type=\"$type\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", type=\"$type\"}) by (addr, prsn, type)",
           "format": "time_series",
           "intervalFactor": 1,
           "legendFormat": "Latency",
           "refId": "B"
         },
         {
-          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\", status!~\"2..\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", prsn=\"$prsn\", type=\"$type\"}) by (addr, prsn, type)",
+          "expr": "sum(request_seconds_count:irate{addr=\"$addr\", type=\"$type\", status!~\"2..\"}) by (addr, prsn, type)\n/\nsum(request_seconds_count:irate{addr=\"$addr\", type=\"$type\"}) by (addr, prsn, type)",
           "format": "time_series",
           "hide": true,
           "intervalFactor": 1,
@@ -648,32 +648,7 @@
         "options": [],
         "query": "request_seconds_count:irate",
         "refresh": 2,
-        "regex": "/.*addr=\"(.*)\",exported_job.*/",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "text": "Example",
-          "value": "Example"
-        },
-        "datasource": "prometheus",
-        "definition": "request_seconds_count:irate",
-        "hide": 0,
-        "includeAll": false,
-        "label": null,
-        "multi": true,
-        "name": "prsn",
-        "options": [],
-        "query": "request_seconds_count:irate",
-        "refresh": 2,
-        "regex": "/.*prsn=\"(.*)\",status.*/",
+        "regex": "/.*addr=\"([^\"]*).*/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
@@ -698,7 +673,7 @@
         "options": [],
         "query": "request_seconds_count:irate",
         "refresh": 2,
-        "regex": "/.*type=\"(.*)\".*/",
+        "regex": "/.*type=\"([^\"]*).*/",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",

@@ -9,7 +9,7 @@ services:
       - TELEGRAM_TOKEN=<your telegram token>
       - DEBUG=*
     ports:
-      - 3000:3000
+      - 3001:3000
 
   etcd:
     image: quay.io/coreos/etcd:v3.2.25

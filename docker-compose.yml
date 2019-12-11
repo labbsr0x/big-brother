@@ -14,26 +14,11 @@ services:
       - TELEGRAM_TOKEN=<your telegram token>
       - DEBUG=*
     ports:
-      - 3000:3000
+      - 3001:3000
     depends_on:
       - alertmanager
     volumes:
       - bot:/data
-
-  grafana:
-    image: labbsr0x/big-brother-grafana:latest
-    build:
-      context: grafana
-      dockerfile: Dockerfile
-      args:
-        prometheusurl: http://localhost:9090
-        acesstype: direct
-        useradmin: bigbrother
-        userpassword: bigbrother
-    depends_on:
-      - monitor
-    ports:
-      - 3000:3000
 
   etcd:
     image: quay.io/coreos/etcd:v3.2.25
@@ -99,6 +84,23 @@ services:
       - BB_PROMSTER_LEVEL=1
       - ETCD_URLS=http://example-etcd:2379
       - SCRAPE_ETCD_PATH=/services/metrics-generator
+  
+  example-grafana:
+    image: labbsr0x/big-brother-grafana:latest
+    depends_on: 
+      - example-bb-promster
+    build:
+      context: grafana
+      dockerfile: Dockerfile
+      args:
+        prometheusurl: http://localhost:9091
+        acesstype: direct
+        useradmin: bigbrother
+        userpassword: bigbrother
+    depends_on:
+      - monitor
+    ports:
+      - 3000:3000
 
 volumes:
   bot:
