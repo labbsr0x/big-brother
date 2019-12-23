@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
 
-  # big brother is defined below by a collection of services: a bot, etcd, monitor, alertmanager and grafana
+  # big brother is defined below by a collection of services: bot, etcd, monitor and alertmanager
 
   bot:
     build:
