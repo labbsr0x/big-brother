@@ -63,6 +63,8 @@ services:
     ports:
       - 32865:32865
     environment:
+      - REGISTRY_SERVICE=example-service
+      - REGISTRY_ETCD_BASE=/metrics-generator
       - REGISTRY_ETCD_URL=http://example-etcd:2379
   
   example-etcd:
@@ -79,11 +81,26 @@ services:
       - example-etcd
       - example-service
     ports:
-      - 9091:9090
+      - 9090
     environment:
+      - REGISTRY_SERVICE=example-service
+      - REGISTRY_ETCD_BASE=/metrics-generator
       - BB_PROMSTER_LEVEL=1
       - ETCD_URLS=http://example-etcd:2379
-      - SCRAPE_ETCD_PATH=/services/metrics-generator
+      - SCRAPE_ETCD_PATH=/metrics-generator/example-service
+
+  example-bb-promster-grafana:
+    image: labbsr0x/bb-promster:latest
+    depends_on:
+      - example-bb-promster
+    ports:
+      - 9091:9090
+    environment:
+      - REGISTRY_SERVICE=example
+      - REGISTRY_ETCD_BASE=/metrics-generator
+      - BB_PROMSTER_LEVEL=2
+      - ETCD_URLS=http://example-etcd:2379
+      - CLEAR_RR=true
   
   example-grafana:
     image: labbsr0x/big-brother-grafana:latest
@@ -92,11 +109,11 @@ services:
     build:
       context: grafana
       dockerfile: Dockerfile
-      args:
-        prometheusurl: http://localhost:9091
-        acesstype: direct
-        useradmin: bigbrother
-        userpassword: bigbrother
+    environment: 
+      - PROMETHEUS_URL=http://localhost:9091
+      - PROMETHEUS_ACCESS_TYPE=direct
+      - GF_SECURITY_ADMIN_USER=bigbrother
+      - GF_SECURITY_ADMIN_PASSWORD=bigbrother
     depends_on:
       - monitor
     ports:
