@@ -1,4 +1,4 @@
-FROM node:10-alpine as BUILDER
+FROM node:13.8.0-alpine as BUILDER
 
 USER root
 
@@ -10,15 +10,9 @@ RUN npm rebuild
 
 COPY . /app
 
-FROM node:lts-alpine as RUNNER
-
-WORKDIR /app
-
 # ENVS
 ENV ETCD_URLS ""
-
-# SETUP
-COPY --from=BUILDER /app /app
+ENV TELEGRAM_TOKEN ""
 
 # RUN
 CMD [ "npm", "start" ]
