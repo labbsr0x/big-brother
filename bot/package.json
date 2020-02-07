@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "debug": "node $NODE_DEBUG_OPTION src/index.js -r @babel/register",
-    "start": "node src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src/index.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -21,15 +21,21 @@
   "license": "MIT",
   "dependencies": {
     "actions-on-google": "^2.12.0",
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
     "dialogflow-fulfillment": "^0.6.0",
     "etcd3": "^0.2.13",
     "express": "^4.17.1",
-    "grpc": "^1.24.1",
+    "grpc": "^1.24.2",
     "https": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
-    "@babel/register": "^7.6.2"
+    "@babel/register": "^7.6.2",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^7.0.1",
+    "nodemon": "^2.0.2",
+    "sinon": "^8.1.1"
   }
 }

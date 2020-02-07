@@ -1,5 +1,5 @@
 const ETCD_URLS = process.env.ETCD_URLS;
-const TELEGRAM_TOKEN = process.env.ETCD_URLS;
+const TELEGRAM_TOKEN = process.env.TELEGRAM_TOKEN;
 
 /***
  * Load all envs and structure them correctly

@@ -1,37 +1,19 @@
 const { listSubscriptions } = require('./db');
 const { TELEGRAM_TOKEN } = require('./environment');
+const axios = require('axios');
 const https = require('https');
 
-function alert(name, message) {
-    listSubscriptions(name).then((subss) => {
-        let sendMessagePath = `bot${TELEGRAM_TOKEN}/sendMessage`;
-
-        subss.forEach((subs) => {
-            let req = https.request({
-                host: "https://api.telegram.org/",
-                path: sendMessagePath,
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            }, (res) => {
-                if (res.statusCode == 200) {
-                    console.log(`Sent message to '${subs}'`);
-                } else {
-                    console.log(`Couldn't send message to '${subs}'`);
-                }
-            });
-
-            req.write(JSON.stringify({
-                chatId: subs,
-                text: message
-            }));
-
-            req.end();
-
-        });
+async function alert(name, message) {
+    let subss = await listSubscriptions(name); 
+    let sendMessagePath = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
+    let promisses = subss.map((chatId) => {
+        return axios.post(sendMessagePath,
+            {
+                chat_id: chatId,
+                text: `${message}`
+            })
     });
-    return Promisses;
+    return Promise.all(promisses);
 }
 
 module.exports = {
