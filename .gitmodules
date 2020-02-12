@@ -4,3 +4,12 @@
 [submodule "promster"]
 	path = promster
 	url = https://github.com/labbsr0x/bb-promster
+[submodule "libs/servlet-monitor"]
+	path = libs/servlet-monitor
+	url = https://github.com/labbsr0x/servlet-monitor
+[submodule "libs/express-monitor"]
+	path = libs/express-monitor
+	url = https://github.com/labbsr0x/express-monitor
+[submodule "libs/flask-monitor"]
+	path = libs/flask-monitor
+	url = https://github.com/labbsr0x/flask-monitor
