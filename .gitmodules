@@ -13,3 +13,6 @@
 [submodule "libs/flask-monitor"]
 	path = libs/flask-monitor
 	url = https://github.com/labbsr0x/flask-monitor
+[submodule "bot"]
+	path = bot
+	url = https://github.com/labbsr0x/bb-bot
