@@ -1,0 +1,39 @@
+name: Node.js CI
+
+on: [push]
+
+jobs:
+  container-job:
+
+    runs-on: ubuntu-latest
+
+    services:
+      etcd:
+        image: quay.io/coreos/etcd:v3.2.25
+        ports:
+          - 2379:2379
+        env:
+          ETCD_LISTEN_CLIENT_URLS: http://0.0.0.0:2379
+          ETCD_ADVERTISE_CLIENT_URLS: http://etcd:2379
+
+    strategy:
+      matrix:
+        node-version: [12.1, 13.7.0]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+      working-directory: bot
+    - run: npm run build --if-present
+      working-directory: bot
+    - run: npm test
+      working-directory: bot
+      env:
+        CI: true
+        ETCD_HOST: etcd
+        ETCD_URLS: "http://localhost:${{ job.services.etcd.ports['2379'] }}"
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}

@@ -8,11 +8,12 @@ const etcd = new Etcd3({hosts: ETCD_URLS});
  * @returns {Promise<string[]>}
  */
 function listApps() {
-    return etcd.getAll().prefix("/clients").keys().then((apps) => {
-        for (let i = 0; i < apps.length; i++) {
-            let strs = apps[i].split("/", 3);
-            apps[i] = strs[strs.length - 1];
-        }
+    return etcd.getAll().prefix("/clients").keys().then((appss) => {
+        let apps = appss.map((sub) => { 
+            let res = sub.split("/", 3); 
+            return res.length === 3 ? res[res.length - 1] : undefined 
+        })
+        apps = apps.filter(Boolean)
         return new Promise((resolve) => {
             resolve(apps);
         });
@@ -25,8 +26,12 @@ function listApps() {
  * @param {String} address the bb-promster address
  * @returns {Promise<IPutResponse>}
  */
-function addApp(name, address) {
-    return etcd.put(`/clients/${name}/${address}`).value("").exec();
+async function addApp(name, address) {
+    let keyExists = await etcd.getAll().prefix(`/clients/${name}/${address}`).keys();
+    if (!keyExists || (Array.isArray(keyExists) && keyExists.length === 0)) {
+        return etcd.put(`/clients/${name}/${address}`).value("").exec();
+    }
+    throw Error("Duplicated app")
 }
 
 /**
@@ -65,12 +70,12 @@ function unsubscribeToApp(name, chatId) {
  */
 function listSubscriptions(name) {
     return etcd.getAll().prefix(`/subscriptions/${name}`).keys().then((subss) => {
-        for (let i = 0; i < subss.length; i++) {
-            let strs = apps[i].split("/", 3);
-            subss[i] = strs[strs.length - 1];
-        }
+        let chats = subss.map((sub) => { 
+            let res = sub.split("/"); 
+            return res[res.length - 1] 
+        })
         return new Promise((resolve) => {
-            resolve(subss);
+            resolve(chats);
         });
     });
 }
@@ -81,5 +86,6 @@ module.exports = {
     rmApp,
     subscribeToApp,
     unsubscribeToApp,
-    listSubscriptions
+    listSubscriptions,
+    etcd
 }
