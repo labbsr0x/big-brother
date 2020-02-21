@@ -3,7 +3,7 @@ This project defines a service to effectively communicate observability events t
 
 # How does it work
 
-![motive](https://raw.githubusercontent.com/labbsr0x/big-brother/assets/bigbrother.png "design")
+![motive](https://raw.githubusercontent.com/labbsr0x/big-brother/assets/bigbrother-cortex.png "design")
 
 Basically, it collects the necessary metrics from a client provided [BB Promster](https://github.com/labbsr0x/bb-promster) cluster endpoint.
 
