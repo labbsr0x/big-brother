@@ -119,6 +119,24 @@ services:
     ports:
       - 3000:3000
 
+  hydra:
+    image: oryd/hydra:v1.3.2
+    ports:
+      - "4444:4444" # Public port
+      - "4445:4445" # Admin port
+    environment:
+      - DSN=memory
+      - URLS_SELF_ISSUER=https://localhost:4444/
+
+  oathkeeper:
+    image: oryd/oathkeeper:latest
+    ports:
+      - "4446:4446"
+    environment:
+      - DSN=memory
+      - AUTHENTICATOR_OAUTH2_INTROSPECTION_URL=http://hydra:4445/oauth2/introspect
+      - AUTHENTICATOR_OAUTH2_CLIENT_CREDENTIALS_TOKEN_URL=http://hydra:4444/oauth2/token
+
 volumes:
   bot:
   alertmanager:
