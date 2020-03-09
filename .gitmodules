@@ -16,3 +16,6 @@
 [submodule "bot"]
 	path = bot
 	url = https://github.com/labbsr0x/bb-bot
+[submodule "bb-alertmanager"]
+	path = bb-alertmanager
+	url = https://github.com/labbsr0x/bb-alertmanager
