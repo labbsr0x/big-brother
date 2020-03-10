@@ -19,3 +19,6 @@
 [submodule "bb-alertmanager"]
 	path = bb-alertmanager
 	url = https://github.com/labbsr0x/bb-alertmanager
+[submodule "bb-protocol"]
+	path = bb-protocol
+	url = https://github.com/labbsr0x/bb-protocol
