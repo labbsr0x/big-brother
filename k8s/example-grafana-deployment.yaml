@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.20.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: example-grafana
+  name: example-grafana
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.20.0 ()
+      creationTimestamp: null
+      labels:
+        io.kompose.service: example-grafana
+    spec:
+      containers:
+      - env:
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          value: bigbrother
+        - name: GF_SECURITY_ADMIN_USER
+          value: bigbrother
+        - name: PROMETHEUS_ACCESS_TYPE
+          value: direct
+        - name: PROMETHEUS_URL
+          value: http://localhost:9091
+        image: labbsr0x/big-brother-grafana:latest
+        name: example-grafana
+        ports:
+        - containerPort: 3000
+        resources: {}
+      restartPolicy: Always
+status: {}
