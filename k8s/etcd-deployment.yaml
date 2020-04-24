@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.20.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: etcd
+  name: etcd
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.20.0 ()
+      creationTimestamp: null
+      labels:
+        io.kompose.service: etcd
+    spec:
+      containers:
+      - env:
+        - name: ETCD_ADVERTISE_CLIENT_URLS
+          value: http://etcd:2379
+        - name: ETCD_LISTEN_CLIENT_URLS
+          value: http://0.0.0.0:2379
+        image: quay.io/coreos/etcd:v3.2.25
+        name: etcd
+        ports:
+        - containerPort: 2379
+        resources: {}
+      restartPolicy: Always
+status: {}
