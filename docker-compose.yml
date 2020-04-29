@@ -32,7 +32,7 @@ services:
     image: labbsr0x/big-brother-alertmanager
     build:
       dockerfile: Dockerfile
-      context: alertmanager
+      context: bb-alertmanager
     ports:
       - 9093:9093
     environment:
