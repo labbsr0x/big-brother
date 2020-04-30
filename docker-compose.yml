@@ -88,6 +88,8 @@ services:
       - BB_PROMSTER_LEVEL=1
       - ETCD_URLS=http://example-etcd:2379
       - SCRAPE_ETCD_PATH=/metrics-generator/example-service
+      - ALERT_MANAGER_URLS=alertmanager:9093
+      - ALERT_MANAGER_SCHEME=http
 
   example-bb-promster-grafana:
     image: labbsr0x/bb-promster:latest
