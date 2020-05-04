@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
 
-  # big brother is defined below by a collection of services: bot, etcd, monitor and alertmanager
+  # big brother is defined below by a collection of services: bot, etcd and alertmanager
 
   bot:
     build:
@@ -40,22 +40,6 @@ services:
     volumes:
       - alertmanager:/alertmanager
 
-  monitor:
-    image: labbsr0x/big-brother-monitor:latest
-    build:
-      dockerfile: Dockerfile
-      context: monitor
-    depends_on:
-      - example-bb-promster
-      - alertmanager
-      - etcd
-    ports:
-      - 9090:9090
-    environment:
-      - BB_PROMSTER_LEVEL=1
-      - ETCD_URLS=http://etcd:2379
-      - ALERT_MANAGER_URLS=alertmanager:9093
-
   # below is defined the example setup for metric consumption by big brother
 
   example-service:
@@ -65,20 +49,12 @@ services:
     environment:
       - REGISTRY_SERVICE=example-service
       - REGISTRY_ETCD_BASE=/metrics-generator
-      - REGISTRY_ETCD_URL=http://example-etcd:2379
-  
-  example-etcd:
-    image: quay.io/coreos/etcd:v3.2.25
-    ports:
-      - 2379
-    environment:
-      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
-      - ETCD_ADVERTISE_CLIENT_URLS=http://example-etcd:2379
+      - REGISTRY_ETCD_URL=http://etcd:2379
   
   example-bb-promster:
     image: labbsr0x/bb-promster:latest
     depends_on:
-      - example-etcd
+      - etcd
       - example-service
     ports:
       - 9090
@@ -86,12 +62,12 @@ services:
       - REGISTRY_SERVICE=example-service
       - REGISTRY_ETCD_BASE=/metrics-generator
       - BB_PROMSTER_LEVEL=1
-      - ETCD_URLS=http://example-etcd:2379
+      - ETCD_URLS=http://etcd:2379
       - SCRAPE_ETCD_PATH=/metrics-generator/example-service
       - ALERT_MANAGER_URLS=alertmanager:9093
       - ALERT_MANAGER_SCHEME=http
 
-  example-bb-promster-grafana:
+  example-bb-promster-l2:
     image: labbsr0x/bb-promster:latest
     depends_on:
       - example-bb-promster
@@ -101,7 +77,7 @@ services:
       - REGISTRY_SERVICE=example
       - REGISTRY_ETCD_BASE=/metrics-generator
       - BB_PROMSTER_LEVEL=2
-      - ETCD_URLS=http://example-etcd:2379
+      - ETCD_URLS=http://etcd:2379
       - CLEAR_RR=true
   
   example-grafana:
@@ -116,8 +92,6 @@ services:
       - PROMETHEUS_ACCESS_TYPE=direct
       - GF_SECURITY_ADMIN_USER=bigbrother
       - GF_SECURITY_ADMIN_PASSWORD=bigbrother
-    depends_on:
-      - monitor
     ports:
       - 3000:3000
 
