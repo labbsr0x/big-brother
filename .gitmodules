@@ -22,3 +22,6 @@
 [submodule "bb-protocol"]
 	path = bb-protocol
 	url = https://github.com/labbsr0x/bb-protocol
+[submodule "bb-manager"]
+	path = bb-manager
+	url = https://github.com/labbsr0x/bb-manager
