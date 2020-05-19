@@ -1,8 +1,8 @@
 [submodule "grafana"]
 	path = grafana
 	url = https://github.com/labbsr0x/bb-grafana
-[submodule "promster"]
-	path = promster
+[submodule "bb-promster"]
+	path = bb-promster
 	url = https://github.com/labbsr0x/bb-promster
 [submodule "libs/servlet-monitor"]
 	path = libs/servlet-monitor
