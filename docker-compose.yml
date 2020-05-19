@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
 
-  # big brother is defined below by a collection of services: bot, etcd and alertmanager
+  # big brother is defined below by a collection of services: bot, etcd, alertmanager
 
   bot:
     build:
@@ -39,7 +39,7 @@ services:
       - WEBHOOK_URL=http://bot:8080
     volumes:
       - alertmanager:/alertmanager
-
+  
   # below is defined the example setup for metric consumption by big brother
 
   example-service:
