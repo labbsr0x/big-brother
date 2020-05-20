@@ -7,7 +7,8 @@ This project defines a service to effectively communicate observability events t
 
 Basically, it collects the necessary metrics from a client provided [BB Promster](https://github.com/labbsr0x/bb-promster) cluster endpoint.
 
-More specifically, the **Big Brother** app federates it's own monitoring cluster to the provided endpoint, and starts collecting **Big Brother** specific metrics, with the help of some useful programming libraries.
+More specifically, the **Cortex** app monitores and stores metrics sended by the **BB Promster Clusters**, and starts collecting **Big Brother** specific metrics, with the help of some useful programming libraries.
+
 
 These metrics are treated as the fundamental protocol behind **Big Brother's** capabilities.
 
@@ -16,11 +17,14 @@ These metrics are treated as the fundamental protocol behind **Big Brother's** c
 A valid **Big Brother** library should expose the following metrics: 
 
 ```
-request_seconds_bucket{type, status, isError, method, addr, le}
-request_seconds_count{type, status, isError, method, addr}
-request_seconds_sum{type, status, isError, method, addr}
-response_size_bytes{type, status, isError, method, addr}
+request_seconds_bucket{type, status, isError, errorMessage, method, addr, le}
+request_seconds_count{type, status, isError, errorMessage, method, addr}
+request_seconds_sum{type, status, isError, errorMessage, method, addr}
+response_size_bytes{type, status, isError, errorMessage, method, addr}
 dependency_up{name}
+dependency_request_seconds_bucket{name, type, status, isError, errorMessage, method, addr, le}
+dependency_request_seconds_count{name, type, status, isError, errorMessage, method, add}
+dependency_request_seconds_sum{name, type, status, isError, errorMessage, method, add}
 application_info{version}
 ```
 
@@ -31,18 +35,25 @@ In detail:
 3. `request_seconds_sum` is a counter that counts the overall sum of how long the requests with those exact label occurrences are taking;
 4. `response_size_bytes` is a counter that computes how much data is being sent back to the user for a given request type. It captures the response size from the `content-length` response header. If there is no such header, the value exposed as metric will be zero;
 5. `dependency_up` is a metric to register weather a specific dependency is up (1) or down (0). The label `name` registers the dependency name;
-6. Finally, `application_info` holds static info of an application, such as it's semantic version number; 
+6. `dependency_request_seconds_bucket` is a metric that defines the histogram of how many requests to a specific dependency are falling into the well defined buckets represented by the label le;
+7. `dependency_request_seconds_count` is a counter that counts the overall number of requests to a specific dependency;
+8. `dependency_request_seconds_sum` is a counter that counts the overall sum of how long requests to a specific dependency are taking;
+9. Finally, `application_info` holds static info of an application, such as it's semantic version number;
+
 
 ## Labels
 
 For a specific request:
 
-1. `type` tells which request protocol was used (e.g. `grpc`, `http`, `<your custom protocol>`);
-2. `status` registers the response status code; 
-3. `isError` let you know if the request's response status is considered an error;
-4. `method` registers the request method (e.g. `GET` for http get requests);
-5. `addr` registers the requested endpoint address;
-6. and `version` tells which version of your service has handled the request;
+1. `type` tells which request protocol was used (e.g. `grpc`, `http`, etc);
+2. `status` registers the response status (e.g. HTTP status code);
+3. `method` registers the request method;
+4. `addr` registers the requested endpoint address;
+5. `version` tells which version of your app handled the request;
+6. `isError` lets us know if the status code reported is an error or not;
+7. `errorMessage` registers the error message;
+8. `name` registers the name of the dependency;
+
 
 ## Ecosystem
 
@@ -58,14 +69,14 @@ Without these, you would have to expose the metrics by yourself, possibly leadin
 
 # Components
 
-The **Big Brother** app is composed by an **ETCD cluster**, a **Dialogflow Bot**, a **Prometheus Alertmanager**, a **Grafana** and a **Promster** cluster, all with their own configuration needs.
+The **Big Brother** app is composed by an **ETCD cluster**, a **Dialogflow Bot**, a **Prometheus Alertmanager**, a **Grafana**, a **Promster** cluster, a **Cortex**, and a **BB Manager**,  all with their own configuration needs.
 
 ## ETCD
 
 The ETCD cluster serves 3 purposes:
 
 1. Register client `bb-promster` clusters;
-2. Register **Big Brother's** own monitoring cluster, to allow for sharding via federation;
+2. Register versions of the apps, for updating alerts dynamically;
 3. [TODO] Register **Big Brother's** alertmanager cluster, for high availability;
 
 Gets configured by:
@@ -88,15 +99,30 @@ Gets configured by:
 
 1. `WEBHOOK_URL`: the bot address
 
-## Promster Cluster (monitor)
+## Grafana
+
+A service to generate graphics to help to query, visualize and understand your metrics.
+
+
+## BB-Promster Cluster
 
 The service that federate's on the client's `bb-promster` cluster, hosts and evaluates alerting rules and dispatches alerts accordingly.
 
 Gets configured by:
 
-1. `BB_PROMSTER_LEVEL`: integer greater than 0 that defines which level this promster sits on it's own federation cluster; 
+1. [TO BE DEPRECATED] `BB_PROMSTER_LEVEL`: integer greater than 0 that defines which level this promster sits on it's own federation cluster; 
 2. `ETCD_URLS`: defines the ETCD cluster urls, separated by comma;
 3. `ALERT_MANAGER_URLS`: defines the alertmanager cluster urls;
+
+
+## Cortex
+
+The service that monitores and stores metrics sended by the **BB Promster Clusters**
+
+## BB-Manager
+
+A front-end interface to register apps and version. 
+
 
 # How to Run locally
 
@@ -115,7 +141,7 @@ Gets configured by:
 
 7. Now go to the bot on Telegram, and add a new App. Inform the App name (e.g. `Example`) and the app address (e.g. `example-bb-promster:9090`). You'll be automatically subscribed to the app you've just added.
 
-The example client app `bb-promster` cluster will get registered to the **Big Brother's** ETCD and **Big Brother** will then start collecting metrics by federating it.
+[TO BE DEPRECATED] The example client app `bb-promster` cluster will get registered to the **Big Brother's** ETCD and **Big Brother** will then start collecting metrics by federating it.
 
 Open your browser on `http://localhost:3000` to access the provided Grafana dashboard (user `bigbrother`, password `bigbrother`).
 
