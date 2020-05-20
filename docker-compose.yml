@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
 
-  # big brother is defined below by a collection of services: bot, etcd, alertmanager
+  # big brother is defined below by a collection of services: bot, etcd, alertmanager and bb-manager
 
   bot:
     build:
@@ -40,10 +40,18 @@ services:
     volumes:
       - alertmanager:/alertmanager
   
+  bb-manager:
+    image: labbsr0x/bb-manager
+    build:
+      dockerfile: Dockerfile
+      context: bb-manager
+    ports:
+      - 5000
+  
   # below is defined the example setup for metric consumption by big brother
 
   example-service:
-    image: abilioesteves/metrics-generator:latest
+    image: labbsr0x/metrics-generator:latest
     ports:
       - 32865:32865
     environment:
