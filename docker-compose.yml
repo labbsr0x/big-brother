@@ -59,7 +59,7 @@ services:
       - REGISTRY_ETCD_BASE=/metrics-generator
       - REGISTRY_ETCD_URL=http://etcd:2379
   
-  example-bb-promster:
+  bb-promster:
     image: labbsr0x/bb-promster:latest
     depends_on:
       - etcd
@@ -75,10 +75,10 @@ services:
       - ALERT_MANAGER_URLS=alertmanager:9093
       - ALERT_MANAGER_SCHEME=http
 
-  example-bb-promster-l2:
+  bb-promster-l2:
     image: labbsr0x/bb-promster:latest
     depends_on:
-      - example-bb-promster
+      - bb-promster
     ports:
       - 9091:9090
     environment:
