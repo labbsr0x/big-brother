@@ -7,7 +7,7 @@ This project defines a service to effectively communicate observability events t
 
 Basically, it collects the necessary metrics from a client provided [BB Promster](https://github.com/labbsr0x/bb-promster) cluster endpoint.
 
-More specifically, the **Cortex** app monitores and stores metrics sended by the **BB Promster Clusters**, and starts collecting **Big Brother** specific metrics, with the help of some useful programming libraries.
+More specifically, the **Cortex** app monitors and stores metrics sent by the **BB Promster Clusters**, and starts collecting **Big Brother** specific metrics, with the help of some useful programming libraries.
 
 
 These metrics are treated as the fundamental protocol behind **Big Brother's** capabilities.
@@ -117,7 +117,7 @@ Gets configured by:
 
 ## Cortex
 
-The service that monitores and stores metrics sended by the **BB Promster Clusters**
+The service that monitors and stores metrics sent by the **BB Promster Clusters**
 
 ## BB-Manager
 
