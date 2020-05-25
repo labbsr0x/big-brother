@@ -40,14 +40,6 @@ services:
     volumes:
       - alertmanager:/alertmanager
   
-  bb-manager:
-    image: labbsr0x/bb-manager
-    build:
-      dockerfile: Dockerfile
-      context: bb-manager
-    ports:
-      - 5000
-  
   # below is defined the example setup for metric consumption by big brother
 
   example-service:
