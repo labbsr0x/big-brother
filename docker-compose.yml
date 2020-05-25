@@ -2,7 +2,7 @@ version: '3.5'
 
 services:
 
-  # big brother is defined below by a collection of services: bot, etcd, alertmanager and bb-manager
+  # big brother is defined below by a collection of services: bot, etcd, and alertmanager
 
   bot:
     build:
