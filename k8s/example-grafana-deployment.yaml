@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: example-grafana-deployment
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: grafana
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      containers:
+      - env:
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          value: bigbrother
+        - name: GF_SECURITY_ADMIN_USER
+          value: bigbrother
+        - name: PROMETHEUS_ACCESS_TYPE
+          value: direct
+        - name: PROMETHEUS_URL
+          value: http://localhost:9091
+        image: labbsr0x/big-brother-grafana:latest
+        imagePullPolicy: IfNotPresent
+        name: example-grafana
+        ports: 
+        - containerPort: 3000
+        resources: {}
+      restartPolicy: Always
