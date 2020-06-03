@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: bot-deployment
+  labels:
+    app: bot
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: bot
+  template:
+    metadata:
+      labels:
+        app: bot
+    spec:
+      containers:
+      - env:
+        - name: ETCD_URLS
+          value: http://etcd:2379
+        - name: TELEGRAM_TOKEN
+          value: <your telegram token>
+        - name: DEBUG
+          value: "*"
+        image: labbsr0x/big-brother-bot:latest
+        imagePullPolicy: IfNotPresent
+        name: bot
+        ports: 
+        - containerPort: 3000
+        resources: {}
+      restartPolicy: Always
