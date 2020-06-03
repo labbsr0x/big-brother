@@ -21,7 +21,7 @@ spec:
         - name: REGISTRY_ETCD_BASE
           value: /metrics-generator
         - name: BB_PROMSTER_LEVEL
-          value: 1
+          value: "1"
         - name: ETCD_URLS
           value: http://etcd:2379
         - name: SCRAPE_ETCD_PATH
