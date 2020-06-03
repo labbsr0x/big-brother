@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: bb-promster-l2-deployment
+  labels:
+    app: bb-promster-l2
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: bb-promster-l2
+  template:
+    metadata:
+      labels:
+        app: bb-promster-l2
+    spec:
+      containers:
+      - env:
+        - name: REGISTRY_SERVICE
+          value: example
+        - name: REGISTRY_ETCD_BASE
+          value: /metrics-generator
+        - name: BB_PROMSTER_LEVEL
+          value: "2"
+        - name: ETCD_URLS
+          value: http://etcd:2379
+        - name: CLEAR_RR
+          value: true
+        image: labbsr0x/bb-promster:latest
+        imagePullPolicy: IfNotPresent
+        name: bb-promster-l2
+        ports: 
+        - containerPort: 9090
+        resources: {}
+      restartPolicy: Always

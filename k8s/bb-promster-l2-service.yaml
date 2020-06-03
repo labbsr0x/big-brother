@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bb-promster-l2
+spec:
+  selector:
+    app: bb-promster-l2
+  ports:
+    - port: 9091
+      targetPort: 9090
