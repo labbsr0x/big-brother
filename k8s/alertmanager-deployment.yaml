@@ -24,4 +24,11 @@ spec:
         ports: 
         - containerPort: 9093
         resources: {}
+        volumeMounts:
+        - mountPath: /alertmanager
+          name: alertmanager
       restartPolicy: Always
+      volumes:
+      - name: alertmanager
+        persistentVolumeClaim:
+          claimName: alertmanager
