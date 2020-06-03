@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: bb-promster-deployment
+  labels:
+    app: bb-promster
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: bb-promster
+  template:
+    metadata:
+      labels:
+        app: bb-promster
+    spec:
+      containers:
+      - env:
+        - name: REGISTRY_SERVICE
+          value: example-service
+        - name: REGISTRY_ETCD_BASE
+          value: /metrics-generator
+        - name: BB_PROMSTER_LEVEL
+          value: 1
+        - name: ETCD_URLS
+          value: http://etcd:2379
+        - name: SCRAPE_ETCD_PATH
+          value: /metrics-generator/example-service
+        - name: ALERT_MANAGER_URLS
+          value: alertmanager:9093
+        - name: ALERT_MANAGER_SCHEME
+          value: http
+        image: labbsr0x/bb-promster:latest
+        imagePullPolicy: IfNotPresent
+        name: bb-promster
+        ports: 
+        - containerPort: 9090
+        resources: {}
+      restartPolicy: Always
