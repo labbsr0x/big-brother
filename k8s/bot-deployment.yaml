@@ -28,4 +28,11 @@ spec:
         ports: 
         - containerPort: 3000
         resources: {}
+        volumeMounts:
+        - mountPath: /data
+          name: bot
       restartPolicy: Always
+      volumes:
+      - name: bot
+        persistentVolumeClaim:
+          claimName: bot
