@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: alertmanager-deployment
+  labels:
+    app: alertmanager
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: alertmanager
+  template:
+    metadata:
+      labels:
+        app: alertmanager
+    spec:
+      containers:
+      - env:
+        - name: WEBHOOK_URL
+          value: http://bot:8080
+        image: labbsr0x/big-brother-alertmanager:latest
+        imagePullPolicy: IfNotPresent
+        name: alertmanager
+        ports: 
+        - containerPort: 9093
+        resources: {}
+      restartPolicy: Always
