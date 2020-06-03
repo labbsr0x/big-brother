@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: example-service-deployment
+  labels:
+    app: example-service
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: example-service
+  template:
+    metadata:
+      labels:
+        app: example-service
+    spec:
+      containers:
+      - env:
+        - name: REGISTRY_SERVICE
+          value: example-service
+        - name: REGISTRY_ETCD_BASE
+          value: /metrics-generator
+        - name: REGISTRY_ETCD_URL
+          value: http://etcd:2379
+        image: labbsr0x/metrics-generator:latest
+        imagePullPolicy: IfNotPresent
+        name: example-service
+        ports: 
+        - containerPort: 32865
+        resources: {}
+      restartPolicy: Always
