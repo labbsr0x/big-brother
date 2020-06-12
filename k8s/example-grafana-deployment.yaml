@@ -8,11 +8,11 @@ spec:
   replicas: 1
   selector: 
     matchLabels:
-      app: grafana
+      app: example-grafana
   template:
     metadata:
       labels:
-        app: grafana
+        app: example-grafana
     spec:
       containers:
       - env:
@@ -24,7 +24,7 @@ spec:
           value: direct
         - name: PROMETHEUS_URL
           value: http://localhost:9091
-        image: labbsr0x/big-brother-grafana:latest
+        image: labbsr0x/bb-grafana:latest
         imagePullPolicy: IfNotPresent
         name: example-grafana
         ports: 
