@@ -27,7 +27,7 @@ spec:
         - name: SCRAPE_ETCD_PATH
           value: /metrics-generator/example-service
         - name: ALERT_MANAGER_URLS
-          value: alertmanager:9093
+          value: http://alertmanager.svc.cluster.local:9093
         - name: ALERT_MANAGER_SCHEME
           value: http
         image: labbsr0x/bb-promster:latest
