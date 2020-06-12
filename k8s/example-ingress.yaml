@@ -41,3 +41,10 @@ spec:
         backend:
           serviceName: example-service
           servicePort: 32865
+  - host: bot.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: bot
+          servicePort: 3001

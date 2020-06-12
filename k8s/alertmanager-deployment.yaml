@@ -17,7 +17,7 @@ spec:
       containers:
       - env:
         - name: WEBHOOK_URL
-          value: bot.default.svc.cluster.local:3000
+          value: http://bot.default.svc.cluster.local:3000
         image: labbsr0x/big-brother-alertmanager:latest
         imagePullPolicy: IfNotPresent
         name: alertmanager
