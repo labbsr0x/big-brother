@@ -23,7 +23,7 @@ spec:
         - name: BB_PROMSTER_LEVEL
           value: "2"
         - name: ETCD_URLS
-          value: http://etcd.svc.cluster.local:2379
+          value: etcd.default.svc.cluster.local:2379
         - name: CLEAR_RR
           value: "true"
         image: labbsr0x/bb-promster:latest
