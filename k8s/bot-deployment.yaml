@@ -17,7 +17,7 @@ spec:
       containers:
       - env:
         - name: ETCD_URLS
-          value: http://etcd:2379
+          value: http://etcd.svc.cluster.local:2379
         - name: TELEGRAM_TOKEN
           value: <your telegram token>
         - name: DEBUG

@@ -3,8 +3,10 @@ kind: Service
 metadata:
   name: example-service
 spec:
+  type: NodePort
   selector:
     app: example-service
   ports:
     - port: 32865
       targetPort: 32865
+      nodePort: 31334

@@ -23,7 +23,7 @@ spec:
         - name: BB_PROMSTER_LEVEL
           value: "1"
         - name: ETCD_URLS
-          value: http://etcd.svc.cluster.local:9093
+          value: http://etcd.svc.cluster.local:2379
         - name: SCRAPE_ETCD_PATH
           value: /metrics-generator/example-service
         - name: ALERT_MANAGER_URLS
