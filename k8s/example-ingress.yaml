@@ -20,3 +20,10 @@ spec:
         backend:
           serviceName: alertmanager
           servicePort: 9093
+  - host: bb-promster.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: bb-promster
+          servicePort: 9090
