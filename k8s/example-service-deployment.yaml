@@ -21,7 +21,7 @@ spec:
         - name: REGISTRY_ETCD_BASE
           value: /metrics-generator
         - name: REGISTRY_ETCD_URL
-          value: http://etcd:2379
+          value: http://etcd.svc.cluster.local:2379
         image: labbsr0x/metrics-generator:latest
         imagePullPolicy: IfNotPresent
         name: example-service

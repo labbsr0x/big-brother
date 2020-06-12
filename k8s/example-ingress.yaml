@@ -34,3 +34,10 @@ spec:
         backend:
           serviceName: bb-promster-l2
           servicePort: 9091
+  - host: example-service.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: example-service
+          servicePort: 32865

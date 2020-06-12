@@ -19,7 +19,7 @@ spec:
         - name: ETCD_LISTEN_CLIENT_URLS
           value: http://0.0.0.0:2379
         - name: ETCD_ADVERTISE_CLIENT_URLS
-          value: http://etcd:2379
+          value: http://0.0.0.0:2379
         image: quay.io/coreos/etcd:v3.2.25
         imagePullPolicy: IfNotPresent
         name: etcd
