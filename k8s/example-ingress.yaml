@@ -13,3 +13,10 @@ spec:
         backend:
           serviceName: example-grafana
           servicePort: 3000
+  - host: alertmanager.info
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: alertmanager
+          servicePort: 9093
