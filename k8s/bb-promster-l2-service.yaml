@@ -3,8 +3,10 @@ kind: Service
 metadata:
   name: bb-promster-l2
 spec:
+  type: NodePort
   selector:
     app: bb-promster-l2
   ports:
     - port: 9091
       targetPort: 9090
+      nodePort: 31333
