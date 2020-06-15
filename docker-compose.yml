@@ -83,7 +83,7 @@ services:
   example-grafana:
     image: labbsr0x/big-brother-grafana:latest
     depends_on: 
-      - example-bb-promster
+      - bb-promster
     build:
       context: grafana
       dockerfile: Dockerfile
