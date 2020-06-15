@@ -126,6 +126,7 @@ A front-end interface to register apps and version.
 
 # How to Run locally
 
+## Using Docker
 1. Talk to Telegram's Bot Father, create your own bot and get it's Telegram Token;
 2. Open a Dialogflow account, create a new project and import the configs from the folder `bot/dialogflow`;
 3. Train your intents;
@@ -145,7 +146,10 @@ A front-end interface to register apps and version.
 
 Open your browser on `http://localhost:3000` to access the provided Grafana dashboard (user `bigbrother`, password `bigbrother`).
 
-Also, access `http://localhost:3001/test` on your browser to dispatch test alerts and see if you get them at your Telegram chat. 
+Also, access `http://localhost:3001/test` on your browser to dispatch test alerts and see if you get them at your Telegram chat.
+
+## Using Kubernetes
+Follow [this tutorial](https://github.com/labbsr0x/big-brother/blob/master/k8s/README.md) to run using Kubernetes.
 
 # Trivia
 
