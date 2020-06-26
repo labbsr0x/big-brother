@@ -25,6 +25,6 @@
 [submodule "bb-manager"]
 	path = bb-manager
 	url = https://github.com/labbsr0x/bb-manager
-[submodule "mux-monitor"]
-	path = mux-monitor
+[submodule "libs/mux-monitor"]
+	path = libs/mux-monitor
 	url = https://github.com/labbsr0x/mux-monitor
