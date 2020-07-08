@@ -28,3 +28,6 @@
 [submodule "libs/mux-monitor"]
 	path = libs/mux-monitor
 	url = https://github.com/labbsr0x/mux-monitor
+[submodule "libs/fiber-monitor"]
+	path = libs/fiber-monitor
+	url = https://github.com/labbsr0x/fiber-monitor
