@@ -152,7 +152,7 @@ Open your browser on `http://localhost:3000` to access the provided Grafana dash
 Also, access `http://localhost:3001/test` on your browser to dispatch test alerts and see if you get them at your Telegram chat.
 
 ## Using Kubernetes
-Follow [this tutorial](https://github.com/labbsr0x/big-brother/blob/master/k8s/README.md) to run using Kubernetes.
+Follow [this tutorial](https://github.com/labbsr0x/big-brother/blob/master/k8s/README.MD) to run using Kubernetes.
 
 # Trivia
 
