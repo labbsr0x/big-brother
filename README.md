@@ -65,7 +65,8 @@ The following libraries make part of **Big Brother** official libraries:
 4. [`flask-monitor`](https://github.com/labbsr0x/flask-monitor) for Python Flask apps;
 5. [`mux-monitor`](https://github.com/labbsr0x/mux-monitor) for the Golang Mux apps;
 6. [`fiber-monitor`](https://github.com/labbsr0x/fiber-monitor) for the Golang Fiber apps;
-7. [TODO] `iris-monitor` for Golang Iris apps;
+7. [`gin-monitor`](https://github.com/bancodobrasil/gin-monitor) for the Golang Gin apps;
+8. [TODO] `iris-monitor` for Golang Iris apps;
 
 
 Without these, you would have to expose the metrics by yourself, possibly leading to inconsistencies and other errors when setting up your app's observability infrastructure with **Big Brother**.   
